@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="https://criarleal.github.io/thaasmr/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.png">
   <title>Tha ASMR - Conte&uacute;do exclusivo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,16 +13,19 @@
     rel="stylesheet">
   <style>
     :root {
-      --bg-void: #0a0c12;
-      --bg-deep: #101320;
-      --bg-mid: #171b2b;
-      --line: rgba(168, 172, 192, 0.14);
-      --line-soft: rgba(168, 172, 192, 0.08);
-      --ink: #eeeae1;
-      --ink-soft: #9a9fb8;
-      --ink-faint: #5d6180;
-      --accent: #c9a29a;
-      --accent-dim: rgba(201, 162, 154, 0.35);
+      --bg-void: #140d09;
+      --bg-deep: #1e150d;
+      --bg-mid: #2a1d11;
+      --line: rgba(214, 168, 108, 0.16);
+      --line-soft: rgba(214, 168, 108, 0.09);
+      --ink: #f4e8d6;
+      --ink-soft: #bda789;
+      --ink-faint: #71604a;
+      --accent: #e0954a;
+      --accent-rgb: 224, 149, 74;
+      --accent-dim: rgba(224, 149, 74, 0.35);
+      --ember: #a8501f;
+      --wax: #7a4130;
       --ease: cubic-bezier(.16, .8, .24, 1);
       --display: 'Fraunces', serif;
       --body: 'Inter', sans-serif;
@@ -68,19 +71,84 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background: radial-gradient(720px 720px at var(--mx, 50%) var(--my, 30%), rgba(201, 162, 154, 0.10), transparent 60%), radial-gradient(1200px 800px at 20% 0%, rgba(90, 100, 150, 0.14), transparent 55%), radial-gradient(1000px 900px at 85% 40%, rgba(60, 50, 70, 0.16), transparent 60%);
-      animation: breathe 9s ease-in-out infinite;
+      background: radial-gradient(600px 600px at var(--mx, 50%) var(--my, 30%), rgba(224, 149, 74, 0.16), transparent 62%), radial-gradient(1100px 780px at 15% 5%, rgba(168, 80, 31, 0.14), transparent 58%), radial-gradient(900px 820px at 88% 45%, rgba(122, 65, 48, 0.18), transparent 60%);
+      animation: flicker 5s linear infinite;
     }
 
-    @keyframes breathe {
-
-      0%,
-      100% {
-        opacity: 0.7;
+    @keyframes flicker {
+      0% {
+        opacity: 0.86;
+        filter: brightness(1);
       }
 
-      50% {
-        opacity: 1;
+      4% {
+        opacity: 0.93;
+        filter: brightness(1.03);
+      }
+
+      8% {
+        opacity: 0.8;
+        filter: brightness(0.97);
+      }
+
+      13% {
+        opacity: 0.97;
+        filter: brightness(1.05);
+      }
+
+      21% {
+        opacity: 0.85;
+        filter: brightness(1);
+      }
+
+      29% {
+        opacity: 0.9;
+        filter: brightness(1.02);
+      }
+
+      37% {
+        opacity: 0.78;
+        filter: brightness(0.96);
+      }
+
+      44% {
+        opacity: 0.95;
+        filter: brightness(1.04);
+      }
+
+      53% {
+        opacity: 0.88;
+        filter: brightness(1);
+      }
+
+      61% {
+        opacity: 0.82;
+        filter: brightness(0.98);
+      }
+
+      68% {
+        opacity: 0.96;
+        filter: brightness(1.05);
+      }
+
+      76% {
+        opacity: 0.87;
+        filter: brightness(1);
+      }
+
+      84% {
+        opacity: 0.91;
+        filter: brightness(1.02);
+      }
+
+      92% {
+        opacity: 0.8;
+        filter: brightness(0.97);
+      }
+
+      100% {
+        opacity: 0.86;
+        filter: brightness(1);
       }
     }
 
@@ -89,9 +157,65 @@
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      opacity: 0.035;
+      opacity: 0.05;
       mix-blend-mode: overlay;
+      filter: sepia(1) saturate(2) hue-rotate(-8deg);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .fabric {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.05;
+      mix-blend-mode: soft-light;
+      background-image: repeating-linear-gradient(45deg, rgba(244, 232, 214, 0.5) 0px, rgba(244, 232, 214, 0.5) 1px, transparent 1px, transparent 3px), repeating-linear-gradient(-45deg, rgba(20, 13, 9, 0.6) 0px, rgba(20, 13, 9, 0.6) 1px, transparent 1px, transparent 3px);
+    }
+
+    .embers {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .ember {
+      position: absolute;
+      bottom: -10px;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px 1px rgba(224, 149, 74, 0.8);
+      animation: rise linear infinite;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.9;
+      }
+
+      90% {
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: translateY(-108vh) translateX(var(--drift, 30px));
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .embers {
+        display: none;
+      }
     }
 
     section,
@@ -122,7 +246,7 @@
     }
 
     header.scrolled {
-      background: rgba(10, 12, 18, 0.72);
+      background: rgba(20, 13, 9, 0.72);
       backdrop-filter: blur(14px) saturate(120%);
       border-bottom: 1px solid var(--line-soft);
     }
@@ -164,7 +288,7 @@
 
     .nav-cta:hover {
       border-color: var(--accent-dim);
-      background: rgba(201, 162, 154, 0.06);
+      background: rgba(224, 149, 74, 0.06);
     }
 
     .hero {
@@ -211,7 +335,7 @@
     .hero-video-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(10, 12, 18, 0.55) 0%, rgba(10, 12, 18, 0.30) 50%, rgba(10, 12, 18, 0.80) 100%), linear-gradient(to right, rgba(10, 12, 18, 0.60) 0%, transparent 60%);
+      background: linear-gradient(to bottom, rgba(20, 13, 9, 0.55) 0%, rgba(20, 13, 9, 0.30) 50%, rgba(20, 13, 9, 0.80) 100%), linear-gradient(to right, rgba(20, 13, 9, 0.60) 0%, transparent 60%);
       pointer-events: none;
     }
 
@@ -433,7 +557,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(10, 12, 18, 0.55) 0%, transparent 55%);
+      background: linear-gradient(to top, rgba(20, 13, 9, 0.55) 0%, transparent 55%);
       pointer-events: none;
     }
 
@@ -833,7 +957,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(10, 12, 18, 0.55);
+      background: rgba(20, 13, 9, 0.55);
       backdrop-filter: blur(10px);
       border: 1px solid var(--line);
       border-radius: 999px;
@@ -860,7 +984,7 @@
     .hero-audio-btn:hover {
       border-color: var(--accent-dim);
       color: var(--ink);
-      background: rgba(10, 12, 18, 0.75);
+      background: rgba(20, 13, 9, 0.75);
     }
 
     /* --- BUY BUTTON --- */
@@ -868,7 +992,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: linear-gradient(135deg, var(--accent) 0%, #b07a72 100%);
+      background: linear-gradient(135deg, var(--accent) 0%, #a8501f 100%);
       color: #fff;
       border: none;
       border-radius: 999px;
@@ -878,13 +1002,13 @@
       font-family: var(--body);
       cursor: pointer;
       transition: transform .4s var(--ease), box-shadow .4s var(--ease);
-      box-shadow: 0 8px 32px rgba(201, 162, 154, 0.25);
+      box-shadow: 0 8px 32px rgba(224, 149, 74, 0.25);
       letter-spacing: 0.02em;
     }
 
     .btn-buy:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(201, 162, 154, 0.40);
+      box-shadow: 0 14px 40px rgba(224, 149, 74, 0.40);
     }
 
     .btn-buy svg {
@@ -905,63 +1029,367 @@
     }
 
     /* --- PURCHASE MODAL --- */
-    .pix-overlay { position:fixed; inset:0; z-index:9000; background:rgba(5,6,12,0.88); backdrop-filter:blur(18px); display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition:opacity .4s var(--ease); }
-    .pix-overlay.open { opacity:1; pointer-events:all; }
-    .pix-modal { background:var(--bg-deep); border:1px solid var(--line); border-radius:28px; padding:clamp(28px,5vw,48px); max-width:560px; width:100%; position:relative; transform:translateY(24px); transition:transform .4s var(--ease); max-height:90svh; overflow-y:auto; }
-    .pix-overlay.open .pix-modal { transform:translateY(0); }
-    .pix-close { position:absolute; top:18px; right:18px; width:36px; height:36px; border-radius:50%; border:1px solid var(--line); background:none; color:var(--ink-soft); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .3s var(--ease); flex-shrink:0; z-index:2; }
-    .pix-close:hover { border-color:var(--accent-dim); color:var(--ink); }
-    .pix-close svg { width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; }
-    .pix-title { font-family:var(--display); font-size:clamp(20px,3vw,26px); font-weight:400; font-style:italic; margin-bottom:6px; }
-    .pix-price { font-size:13px; color:var(--accent); letter-spacing:.08em; text-transform:uppercase; margin-bottom:24px; }
-    .pix-note { font-size:12px; color:var(--ink-faint); text-align:center; margin-top:16px; line-height:1.7; }
+    .pix-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: rgba(5, 6, 12, 0.88);
+      backdrop-filter: blur(18px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s var(--ease);
+    }
+
+    .pix-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .pix-modal {
+      background: var(--bg-deep);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: clamp(28px, 5vw, 48px);
+      max-width: 560px;
+      width: 100%;
+      position: relative;
+      transform: translateY(24px);
+      transition: transform .4s var(--ease);
+      max-height: 90svh;
+      overflow-y: auto;
+    }
+
+    .pix-overlay.open .pix-modal {
+      transform: translateY(0);
+    }
+
+    .pix-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: none;
+      color: var(--ink-soft);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .3s var(--ease);
+      flex-shrink: 0;
+      z-index: 2;
+    }
+
+    .pix-close:hover {
+      border-color: var(--accent-dim);
+      color: var(--ink);
+    }
+
+    .pix-close svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    .pix-title {
+      font-family: var(--display);
+      font-size: clamp(20px, 3vw, 26px);
+      font-weight: 400;
+      font-style: italic;
+      margin-bottom: 6px;
+    }
+
+    .pix-price {
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .pix-note {
+      font-size: 12px;
+      color: var(--ink-faint);
+      text-align: center;
+      margin-top: 16px;
+      line-height: 1.7;
+    }
 
     /* Steps */
-    .modal-step { display:none; }
-    .modal-step.active { display:block; }
+    .modal-step {
+      display: none;
+    }
+
+    .modal-step.active {
+      display: block;
+    }
 
     /* Product cards */
-    .product-cards { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px; }
-    .product-card { border:1px solid var(--line); border-radius:18px; padding:20px 18px; cursor:pointer; transition:all .3s var(--ease); background:var(--bg-mid); }
-    .product-card:hover { border-color:var(--accent-dim); background:rgba(201,162,154,.05); }
-    .product-card.selected { border-color:var(--accent); background:rgba(201,162,154,.08); }
-    .pc-type { font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:10px; }
-    .pc-name { font-family:var(--display); font-size:17px; font-style:italic; font-weight:400; color:var(--ink); margin-bottom:8px; line-height:1.3; }
-    .pc-price { font-size:22px; font-weight:600; color:var(--accent); margin-bottom:10px; }
-    .pc-desc { font-size:12px; color:var(--ink-soft); line-height:1.6; }
-    @media(max-width:480px) { .product-cards { grid-template-columns:1fr; } }
+    .product-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .product-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px 18px;
+      cursor: pointer;
+      transition: all .3s var(--ease);
+      background: var(--bg-mid);
+    }
+
+    .product-card:hover {
+      border-color: var(--accent-dim);
+      background: rgba(224, 149, 74, .05);
+    }
+
+    .product-card.selected {
+      border-color: var(--accent);
+      background: rgba(224, 149, 74, .08);
+    }
+
+    .pc-type {
+      font-size: 11px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 10px;
+    }
+
+    .pc-name {
+      font-family: var(--display);
+      font-size: 17px;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .pc-price {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .pc-desc {
+      font-size: 12px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    @media(max-width:480px) {
+      .product-cards {
+        grid-template-columns: 1fr;
+      }
+    }
 
     /* Form */
-    .form-field { margin-bottom:14px; }
-    .form-field label { display:block; font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:7px; }
-    .form-input { width:100%; background:var(--bg-mid); border:1px solid var(--line); border-radius:12px; padding:12px 16px; font-size:14px; color:var(--ink); font-family:var(--body); outline:none; transition:border-color .3s var(--ease); }
-    .form-input:focus { border-color:var(--accent-dim); }
-    .form-input.error { border-color:rgba(220,80,80,.6); }
-    .form-textarea { resize:vertical; min-height:80px; }
-    .form-note { font-size:12px; color:var(--ink-faint); margin-top:-6px; margin-bottom:14px; line-height:1.5; }
-    .form-error { font-size:13px; color:rgba(220,80,80,.85); min-height:18px; margin-top:4px; }
+    .form-field {
+      margin-bottom: 14px;
+    }
+
+    .form-field label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 7px;
+    }
+
+    .form-input {
+      width: 100%;
+      background: var(--bg-mid);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--ink);
+      font-family: var(--body);
+      outline: none;
+      transition: border-color .3s var(--ease);
+    }
+
+    .form-input:focus {
+      border-color: var(--accent-dim);
+    }
+
+    .form-input.error {
+      border-color: rgba(220, 80, 80, .6);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-note {
+      font-size: 12px;
+      color: var(--ink-faint);
+      margin-top: -6px;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .form-error {
+      font-size: 13px;
+      color: rgba(220, 80, 80, .85);
+      min-height: 18px;
+      margin-top: 4px;
+    }
 
     /* Step nav */
-    .modal-nav { display:flex; align-items:center; justify-content:space-between; margin-top:22px; gap:12px; }
-    .btn-back { background:none; border:1px solid var(--line); border-radius:999px; padding:10px 20px; font-size:13px; font-family:var(--body); color:var(--ink-soft); cursor:pointer; transition:all .3s var(--ease); }
-    .btn-back:hover { border-color:var(--accent-dim); color:var(--ink); }
-    .btn-nav { padding:12px 24px; font-size:14px; }
+    .modal-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 22px;
+      gap: 12px;
+    }
+
+    .btn-back {
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-family: var(--body);
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: all .3s var(--ease);
+    }
+
+    .btn-back:hover {
+      border-color: var(--accent-dim);
+      color: var(--ink);
+    }
+
+    .btn-nav {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
 
     /* Pix QR */
-    .pix-qr { width:170px; height:170px; margin:0 auto 20px; border-radius:14px; overflow:hidden; border:1px solid var(--line); background:#fff; display:flex; align-items:center; justify-content:center; }
-    .pix-qr img { width:100%; height:100%; object-fit:contain; display:block; }
-    .pix-copy-btn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; background:linear-gradient(135deg,var(--accent) 0%,#b07a72 100%); color:#fff; border:none; border-radius:999px; padding:15px 32px; font-size:15px; font-family:var(--body); font-weight:500; cursor:pointer; transition:transform .3s var(--ease),box-shadow .3s var(--ease); box-shadow:0 8px 32px rgba(201,162,154,.25); letter-spacing:.02em; margin-top:4px; }
-    .pix-copy-btn:hover { transform:translateY(-2px); box-shadow:0 14px 40px rgba(201,162,154,.4); }
-    .pix-copy-btn.copied { background:linear-gradient(135deg,#4a9e6a,#357a50); }
+    .pix-qr {
+      width: 170px;
+      height: 170px;
+      margin: 0 auto 20px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pix-qr img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .pix-copy-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent) 0%, #a8501f 100%);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 15px 32px;
+      font-size: 15px;
+      font-family: var(--body);
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+      box-shadow: 0 8px 32px rgba(224, 149, 74, .25);
+      letter-spacing: .02em;
+      margin-top: 4px;
+    }
+
+    .pix-copy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(224, 149, 74, .4);
+    }
+
+    .pix-copy-btn.copied {
+      background: linear-gradient(135deg, #4a9e6a, #357a50);
+    }
 
     /* Success */
-    .success-field { background:var(--bg-mid); border:1px solid var(--line-soft); border-radius:14px; padding:14px 18px; margin-bottom:10px; }
-    .success-field-label { font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:6px; }
-    .success-field-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-    .success-field-val { font-size:13px; color:var(--ink-soft); word-break:break-all; flex:1; }
-    .success-field-val.pw { font-family:monospace; font-size:20px; letter-spacing:.14em; color:var(--accent); }
-    .copy-inline { background:none; border:1px solid var(--line); border-radius:8px; padding:5px 12px; font-size:11px; font-family:var(--body); color:var(--ink-soft); cursor:pointer; white-space:nowrap; flex-shrink:0; transition:all .3s var(--ease); }
-    .copy-inline:hover { border-color:var(--accent-dim); color:var(--ink); }
+    .success-field {
+      background: var(--bg-mid);
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+    }
+
+    .success-field-label {
+      font-size: 11px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 6px;
+    }
+
+    .success-field-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .success-field-val {
+      font-size: 13px;
+      color: var(--ink-soft);
+      word-break: break-all;
+      flex: 1;
+    }
+
+    .success-field-val.pw {
+      font-family: monospace;
+      font-size: 20px;
+      letter-spacing: .14em;
+      color: var(--accent);
+    }
+
+    .copy-inline {
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 5px 12px;
+      font-size: 11px;
+      font-family: var(--body);
+      color: var(--ink-soft);
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all .3s var(--ease);
+    }
+
+    .copy-inline:hover {
+      border-color: var(--accent-dim);
+      color: var(--ink);
+    }
 
     /* --- HAMBURGER --- */
     .hamburger {
@@ -975,6 +1403,7 @@
       z-index: 41;
       position: relative;
     }
+
     .hamburger span {
       display: block;
       width: 22px;
@@ -983,9 +1412,19 @@
       border-radius: 2px;
       transition: transform .35s var(--ease), opacity .35s var(--ease);
     }
-    .hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
 
     @media (max-width: 860px) {
       .nav-links {
@@ -1000,34 +1439,42 @@
         align-items: center;
         justify-content: center;
         gap: 36px;
-        background: rgba(10, 12, 18, 0.97);
+        background: rgba(20, 13, 9, 0.97);
         backdrop-filter: blur(20px);
       }
+
       .nav-links.mobile-open {
         display: flex;
       }
+
       .nav-links a {
         font-size: 20px;
         letter-spacing: 0.06em;
       }
+
       .nav-cta {
         padding: 14px 32px;
         font-size: 15px;
       }
+
       .hamburger {
         display: flex;
       }
+
       .space-grid {
         grid-template-columns: 1fr;
         gap: 48px;
       }
+
       .ritual {
         grid-template-columns: 1fr;
         gap: 40px;
       }
+
       .trust-grid {
         grid-template-columns: 1fr;
       }
+
       .space-img-box {
         aspect-ratio: 16/9;
       }
@@ -1047,6 +1494,8 @@
 
   <div class="breath-field" id="breathField"></div>
   <div class="grain"></div>
+  <div class="fabric"></div>
+  <div class="embers" id="embersField"></div>
 
   <header id="siteHeader">
     <div class="logo"><a href="#">Tha ASMR</a></div>
@@ -1204,7 +1653,7 @@
   <section class="video-section" id="videoProtegido">
     <div class="video-gate" id="videoGate"
       style="background-image: url('thumb.jpg'); background-size: cover; background-position: center; position: relative;">
-      <div style="position:absolute;inset:0;background:rgba(10,12,18,0.92);z-index:0;"></div>
+      <div style="position:absolute;inset:0;background:rgba(20,13,9,0.92);z-index:0;"></div>
       <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;">
         <div class="gate-icon">
           <svg viewBox="0 0 24 24">
@@ -1244,9 +1693,6 @@
   <section id="confianca">
     <div class="wrap">
       <div class="section-head reveal">
-        <div>
-          <h2 class="section-title">Discri&ccedil;&atilde;o tamb&eacute;m &eacute; parte do cuidado.</h2>
-        </div>
       </div>
       <div class="trust-grid reveal">
         <div class="trust-cell">
@@ -1269,14 +1715,18 @@
   <div class="pix-overlay" id="pixOverlay" role="dialog" aria-modal="true" aria-label="Comprar acesso">
     <div class="pix-modal">
       <button class="pix-close" id="pixClose" aria-label="Fechar">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
       </button>
 
       <!-- Step 1: Select Type -->
       <div class="modal-step active" id="step1">
         <p class="pix-title">Escolha seu acesso</p>
-        <p class="pix-note" style="text-align:left; margin-top:4px;">Selecione qual experiência ASMR você deseja adquirir.</p>
-        
+        <p class="pix-note" style="text-align:left; margin-top:4px;">Selecione qual experiência ASMR você deseja
+          adquirir.</p>
+
         <div class="product-cards">
           <div class="product-card selected" id="optCatalog">
             <div class="pc-type">Catálogo</div>
@@ -1291,7 +1741,7 @@
             <div class="pc-desc">Gravado exclusivamente para você. Entregue em até 7 dias após o pagamento.</div>
           </div>
         </div>
-        
+
         <div class="modal-nav" style="justify-content:flex-end;">
           <button class="pix-copy-btn btn-nav" style="width:auto; margin:0;" id="btnToStep2">Continuar &rarr;</button>
         </div>
@@ -1300,31 +1750,33 @@
       <!-- Step 2: Form -->
       <div class="modal-step" id="step2">
         <p class="pix-title">Seus dados</p>
-        <p class="pix-note" style="text-align:left; margin-top:4px; margin-bottom:20px;">Por onde enviaremos seu acesso? Preencha pelo menos um.</p>
-        
+        <p class="pix-note" style="text-align:left; margin-top:4px; margin-bottom:20px;">Por onde enviaremos seu acesso?
+          Preencha pelo menos um.</p>
+
         <div class="form-field">
           <label>Seu Nome (opcional)</label>
           <input type="text" id="fName" class="form-input" placeholder="Como quer ser chamado?">
         </div>
-        
+
         <div class="form-field">
           <label>WhatsApp</label>
           <input type="text" id="fWhats" class="form-input" placeholder="(11) 99999-9999">
         </div>
-        
+
         <div class="form-field">
           <label>E-mail</label>
           <input type="email" id="fEmail" class="form-input" placeholder="seu@email.com">
         </div>
-        
+
         <div class="form-field" id="personalDescBox" style="display:none; margin-top:20px;">
           <label>Como você quer o vídeo?</label>
           <p class="form-note">Descreva os gatilhos, o tom de voz e o que mais desejar.</p>
-          <textarea id="fDesc" class="form-input form-textarea" placeholder="Ex: sussurros bem baixinhos, tapping em madeira, duração..."></textarea>
+          <textarea id="fDesc" class="form-input form-textarea"
+            placeholder="Ex: sussurros bem baixinhos, tapping em madeira, duração..."></textarea>
         </div>
-        
+
         <p class="form-error" id="formError"></p>
-        
+
         <div class="modal-nav">
           <button class="btn-back" id="btnBackTo1">&larr; Voltar</button>
           <button class="pix-copy-btn btn-nav" style="width:auto; margin:0;" id="btnToStep3">Gerar Pix</button>
@@ -1336,29 +1788,42 @@
         <p class="pix-title">Pague com Pix</p>
         <p class="pix-price" id="pixDisplayPrice">R$ 150 &mdash; acesso vitalício</p>
         <div class="pix-qr">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020126580014BR.GOV.BCB.PIX0136exemplo-chave-pix-ficticia" alt="QR Code Pix" loading="lazy">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020126580014BR.GOV.BCB.PIX0136exemplo-chave-pix-ficticia"
+            alt="QR Code Pix" loading="lazy">
         </div>
         <button class="pix-copy-btn" id="pixCopyBtn">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
           Copiar código Pix
         </button>
         <div id="pixCode" style="display:none;">00020126580014BR.GOV.BCB.PIX0136exemplo-chave-pix-ficticia</div>
-        
+
         <p class="pix-note" style="margin-top:24px;">Após o pagamento, o acesso será liberado.</p>
-        
+
         <!-- Simulate Payment Button (just for this demo) -->
-        <button id="demoPayBtn" style="width:100%; margin-top:20px; background:rgba(74,158,106,0.1); color:#4a9e6a; border:1px solid rgba(74,158,106,0.3); border-radius:12px; padding:10px; cursor:pointer; font-size:12px; transition:background .3s;">[Demo] Simular pagamento confirmado</button>
+        <button id="demoPayBtn"
+          style="width:100%; margin-top:20px; background:rgba(74,158,106,0.1); color:#4a9e6a; border:1px solid rgba(74,158,106,0.3); border-radius:12px; padding:10px; cursor:pointer; font-size:12px; transition:background .3s;">[Demo]
+          Simular pagamento confirmado</button>
       </div>
 
       <!-- Step 4: Success -->
       <div class="modal-step" id="step4">
         <div style="text-align:center;">
-          <div style="width:64px;height:64px;border-radius:50%;background:rgba(74,158,106,0.15);border:1px solid rgba(74,158,106,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4a9e6a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <div
+            style="width:64px;height:64px;border-radius:50%;background:rgba(74,158,106,0.15);border:1px solid rgba(74,158,106,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4a9e6a" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
           </div>
           <p class="pix-title" id="successTitle">Acesso criado!</p>
-          <p class="pix-note" id="successSub" style="margin-bottom:24px; font-size:14px;">Guarde o link e a senha abaixo. Eles são o seu acesso vitalício.</p>
-          
+          <p class="pix-note" id="successSub" style="margin-bottom:24px; font-size:14px;">Guarde o link e a senha
+            abaixo. Eles são o seu acesso vitalício.</p>
+
           <div style="text-align:left;">
             <div class="success-field">
               <div class="success-field-label">Seu Link Exclusivo</div>
@@ -1367,7 +1832,7 @@
                 <button class="copy-inline" id="copyUrlBtn">Copiar</button>
               </div>
             </div>
-            
+
             <div class="success-field" style="margin-bottom:24px;">
               <div class="success-field-label">Sua Senha</div>
               <div class="success-field-row">
@@ -1376,11 +1841,12 @@
               </div>
             </div>
           </div>
-          
-          <a href="#" id="watchNowBtn" target="_blank" class="pix-copy-btn" style="text-decoration:none;">Acessar página do vídeo &rarr;</a>
+
+          <a href="#" id="watchNowBtn" target="_blank" class="pix-copy-btn" style="text-decoration:none;">Acessar página
+            do vídeo &rarr;</a>
         </div>
       </div>
-      
+
     </div>
   </div>
 
@@ -1442,6 +1908,24 @@
       heroMuteBtn.addEventListener('click', () => setMuteState(!heroMuted));
       // Start muted, update button label accordingly
       setMuteState(true);
+    }
+
+    const embersField = document.getElementById('embersField');
+    if (embersField && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const EMBER_COUNT = 22;
+      for (let i = 0; i < EMBER_COUNT; i++) {
+        const e = document.createElement('div');
+        e.className = 'ember';
+        const size = 2 + Math.random() * 3;
+        e.style.width = size + 'px';
+        e.style.height = size + 'px';
+        e.style.left = Math.random() * 100 + '%';
+        e.style.setProperty('--drift', (Math.random() * 80 - 40) + 'px');
+        e.style.animationDuration = (8 + Math.random() * 10) + 's';
+        e.style.animationDelay = (Math.random() * 12) + 's';
+        e.style.opacity = 0.4 + Math.random() * 0.5;
+        embersField.appendChild(e);
+      }
     }
 
     const field = document.getElementById('breathField');
@@ -1622,7 +2106,7 @@
     function genRandomStr(len) {
       return Math.random().toString(36).substring(2, 2 + len);
     }
-    
+
     async function hashStr(s) {
       const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
       return btoa(String.fromCharCode(...new Uint8Array(buf)));
@@ -1633,14 +2117,14 @@
       const code = genRandomStr(8);
       const password = genRandomStr(6).toUpperCase();
       const passHash = await hashStr(password);
-      
+
       // 2. Create Order in LocalStorage
       const orders = JSON.parse(localStorage.getItem('thaAsmrOrders') || '[]');
-      
+
       // The current catalog video encrypted ID from the page (we will just reuse the dummy one or a real one)
       // Since this is a demo, we encode a dummy or the actual youtube id 'AnvfmaVpZVU'
       const encodeVid = (id) => btoa([...id].map(c => String.fromCharCode(c.charCodeAt(0) ^ 42)).join(''));
-      
+
       const newOrder = {
         id: crypto.randomUUID(),
         code: code,
@@ -1657,17 +2141,17 @@
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
-      
+
       orders.push(newOrder);
       localStorage.setItem('thaAsmrOrders', JSON.stringify(orders));
-      
+
       // 3. Show Success Step
       const playerUrl = window.location.origin + window.location.pathname.replace(/index\.html$/, '') + 'v/?c=' + code;
-      
+
       document.getElementById('resUrl').textContent = playerUrl;
       document.getElementById('resPw').textContent = password;
       document.getElementById('watchNowBtn').href = playerUrl;
-      
+
       if (selectedType === 'personalized') {
         document.getElementById('successTitle').textContent = 'Pedido confirmado!';
         document.getElementById('successSub').textContent = 'Seu vídeo está na fila de gravação. Guarde o link e senha abaixo, você será notificado por lá quando estiver pronto.';
@@ -1675,7 +2159,7 @@
         document.getElementById('successTitle').textContent = 'Acesso liberado!';
         document.getElementById('successSub').textContent = 'Guarde o link e a senha abaixo. Eles são o seu acesso vitalício.';
       }
-      
+
       showStep(3);
     });
 
