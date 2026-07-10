@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Tha ASMR</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void:#0a0c12; --bg-deep:#101320; --bg-mid:#171b2b; --bg-card:#1c2133;
+      --line:rgba(168,172,192,0.14); --line-soft:rgba(168,172,192,0.08);
+      --ink:#eeeae1; --ink-soft:#9a9fb8; --ink-faint:#5d6180;
+      --accent:#c9a29a; --accent-dim:rgba(201,162,154,0.3);
+      --green:#4a9e6a; --green-dim:rgba(74,158,106,0.15);
+      --orange:#d4864a; --orange-dim:rgba(212,134,74,0.15);
+      --ease:cubic-bezier(.16,.8,.24,1);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg-void);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;}
+
+    /* ── Login ── */
+    #loginPage{display:flex;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;}
+    .login-box{width:100%;max-width:380px;background:var(--bg-deep);border:1px solid var(--line);border-radius:24px;padding:40px 36px;}
+    .login-title{font-family:'Fraunces',serif;font-style:italic;font-size:26px;font-weight:400;margin-bottom:6px;}
+    .login-sub{font-size:13px;color:var(--ink-faint);margin-bottom:28px;}
+    .login-input{width:100%;background:var(--bg-mid);border:1px solid var(--line);border-radius:12px;padding:13px 16px;font-size:14px;color:var(--ink);font-family:'Inter',sans-serif;outline:none;transition:border-color .3s var(--ease);margin-bottom:12px;}
+    .login-input:focus{border-color:var(--accent-dim);}
+    .login-input.error{border-color:rgba(220,80,80,.6);}
+    .login-btn{width:100%;background:var(--ink);color:var(--bg-void);border:none;border-radius:12px;padding:14px;font-size:14px;font-family:'Inter',sans-serif;font-weight:500;cursor:pointer;transition:background .3s var(--ease);}
+    .login-btn:hover{background:var(--accent);}
+    .login-error{font-size:12px;color:rgba(220,80,80,.85);margin-top:10px;text-align:center;}
+
+    /* ── Dashboard ── */
+    #dashboard{display:none;}
+    .top-bar{position:sticky;top:0;z-index:40;background:rgba(10,12,18,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);padding:14px clamp(20px,4vw,48px);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+    .top-brand{font-family:'Fraunces',serif;font-style:italic;font-size:20px;color:var(--ink);margin-right:auto;}
+    .top-btn{display:inline-flex;align-items:center;gap:7px;background:none;border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:12px;letter-spacing:.06em;color:var(--ink-soft);font-family:'Inter',sans-serif;cursor:pointer;transition:all .3s var(--ease);text-decoration:none;}
+    .top-btn:hover{border-color:var(--accent-dim);color:var(--ink);}
+    .top-btn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+    .main{padding:32px clamp(20px,4vw,48px);}
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:32px;}
+    .stat-card{background:var(--bg-deep);border:1px solid var(--line);border-radius:16px;padding:20px 22px;}
+    .stat-n{font-size:32px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+    .stat-l{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);}
+
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+    .filter-btn{background:none;border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:12px;color:var(--ink-soft);font-family:'Inter',sans-serif;cursor:pointer;transition:all .3s var(--ease);}
+    .filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(201,162,154,.08);}
+    .filter-btn:hover:not(.active){border-color:var(--line-soft);color:var(--ink);}
+
+    .empty{text-align:center;padding:60px 24px;color:var(--ink-faint);font-size:14px;}
+    #orderList{display:grid;gap:16px;}
+
+    /* ── Order card ── */
+    .order-card{background:var(--bg-card);border:1px solid var(--line);border-radius:20px;padding:24px;transition:border-color .3s var(--ease);}
+    .order-card:hover{border-color:rgba(168,172,192,0.22);}
+    .card-top{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:20px;}
+    .badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;letter-spacing:.07em;text-transform:uppercase;border-radius:999px;padding:4px 12px;}
+    .badge-catalog{background:rgba(201,162,154,.12);color:var(--accent);border:1px solid var(--accent-dim);}
+    .badge-personal{background:rgba(130,90,180,.12);color:#b89cd8;border:1px solid rgba(130,90,180,.3);}
+    .badge-avail{background:var(--green-dim);color:var(--green);border:1px solid rgba(74,158,106,.3);}
+    .badge-prod{background:var(--orange-dim);color:var(--orange);border:1px solid rgba(212,134,74,.3);}
+    .card-date{font-size:12px;color:var(--ink-faint);margin-left:auto;}
+    .card-name{font-size:16px;font-weight:500;color:var(--ink);margin-bottom:4px;}
+    .card-contact{font-size:13px;color:var(--ink-soft);}
+    .card-desc{font-size:13px;color:var(--ink-soft);background:var(--bg-mid);border:1px solid var(--line-soft);border-radius:10px;padding:12px 14px;margin:14px 0;line-height:1.6;}
+    .card-desc-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px;}
+
+    .access-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:var(--bg-mid);border:1px solid var(--line-soft);border-radius:12px;padding:12px 16px;margin-bottom:8px;}
+    .access-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:3px;}
+    .access-val{font-size:13px;color:var(--ink-soft);word-break:break-all;}
+    .access-val.password{font-family:monospace;font-size:16px;letter-spacing:.12em;color:var(--accent);}
+    .copy-btn{background:none;border:1px solid var(--line);border-radius:8px;padding:5px 12px;font-size:11px;font-family:'Inter',sans-serif;color:var(--ink-soft);cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .3s var(--ease);}
+    .copy-btn:hover{border-color:var(--accent-dim);color:var(--ink);}
+    .copy-btn.ok{border-color:rgba(74,158,106,.4);color:var(--green);}
+
+    .card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;padding-top:18px;border-top:1px solid var(--line-soft);}
+    .action-btn{display:inline-flex;align-items:center;gap:7px;border:none;border-radius:999px;padding:9px 18px;font-size:13px;font-family:'Inter',sans-serif;font-weight:500;cursor:pointer;transition:all .3s var(--ease);text-decoration:none;}
+    .action-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+    .btn-wa{background:rgba(37,211,102,.12);color:#25d366;border:1px solid rgba(37,211,102,.25);}
+    .btn-wa:hover{background:rgba(37,211,102,.2);}
+    .btn-email{background:rgba(201,162,154,.1);color:var(--accent);border:1px solid var(--accent-dim);}
+    .btn-email:hover{background:rgba(201,162,154,.18);}
+    .btn-activate{background:var(--green-dim);color:var(--green);border:1px solid rgba(74,158,106,.3);}
+    .btn-activate:hover{background:rgba(74,158,106,.25);}
+    .btn-pause{background:var(--orange-dim);color:var(--orange);border:1px solid rgba(212,134,74,.3);}
+    .btn-pause:hover{background:rgba(212,134,74,.25);}
+    .btn-danger{background:rgba(220,80,80,.08);color:rgba(220,80,80,.7);border:1px solid rgba(220,80,80,.2);margin-left:auto;}
+    .btn-danger:hover{background:rgba(220,80,80,.15);color:rgba(220,80,80,.9);}
+
+    .yt-row{display:flex;gap:8px;align-items:center;margin-top:14px;}
+    .yt-input{flex:1;background:var(--bg-mid);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--ink);font-family:'Inter',sans-serif;outline:none;transition:border-color .3s var(--ease);}
+    .yt-input:focus{border-color:var(--accent-dim);}
+    .yt-input::placeholder{color:var(--ink-faint);}
+    .yt-save{background:var(--green);color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-family:'Inter',sans-serif;font-weight:500;cursor:pointer;white-space:nowrap;transition:background .3s var(--ease);}
+    .yt-save:hover{background:#3a8a5a;}
+
+    /* Reset demo */
+    .danger-zone{margin-top:40px;padding:20px 24px;border:1px solid rgba(220,80,80,.15);border-radius:16px;background:rgba(220,80,80,.04);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+    .danger-label{font-size:13px;color:rgba(220,80,80,.7);}
+    .danger-btn{background:rgba(220,80,80,.1);color:rgba(220,80,80,.8);border:1px solid rgba(220,80,80,.2);border-radius:10px;padding:9px 18px;font-size:13px;font-family:'Inter',sans-serif;cursor:pointer;transition:all .3s var(--ease);}
+    .danger-btn:hover{background:rgba(220,80,80,.2);color:rgba(220,80,80,1);}
+
+    @media(max-width:600px){
+      .card-actions{gap:6px;}
+      .action-btn{padding:8px 14px;font-size:12px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="loginPage">
+  <div class="login-box">
+    <p class="login-title">Painel Admin</p>
+    <p class="login-sub">Tha ASMR — acesso restrito</p>
+    <input class="login-input" id="loginInput" type="password" placeholder="Senha" autocomplete="off">
+    <button class="login-btn" id="loginBtn">Entrar</button>
+    <p class="login-error" id="loginError"></p>
+  </div>
+</div>
+
+<!-- ── DASHBOARD ── -->
+<div id="dashboard">
+  <div class="top-bar">
+    <span class="top-brand">Tha ASMR — Admin</span>
+    <a href="../" class="top-btn" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Ver site
+    </a>
+    <button class="top-btn" id="logoutBtn">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Sair
+    </button>
+  </div>
+
+  <div class="main">
+    <div class="stats" id="statsRow"></div>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="catalog">Catálogo</button>
+      <button class="filter-btn" data-filter="personalized">Personalizado</button>
+      <button class="filter-btn" data-filter="production">Em produção</button>
+      <button class="filter-btn" data-filter="available">Disponível</button>
+    </div>
+
+    <div id="orderList"></div>
+
+    <div class="danger-zone">
+      <span class="danger-label">⚠ Zona de risco — apenas para demo</span>
+      <button class="danger-btn" id="clearBtn">Apagar todos os pedidos</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────
+  const ADMIN_PASS   = 'tha123';
+  const STORAGE_KEY  = 'thaAsmrOrders';
+  const SESSION_KEY  = 'thaAdminSession';
+
+  // ── PRICES (easy to change) ──────────────────────────────
+  const CATALOG_PRICE      = 150;
+  const PERSONALIZED_PRICE = 200;
+
+  // ── HELPERS ──────────────────────────────────────────────
+  const getOrders = () => { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; } };
+  const saveOrders = o => localStorage.setItem(STORAGE_KEY, JSON.stringify(o));
+
+  function encodeVid(id) {
+    return btoa([...id].map(c => String.fromCharCode(c.charCodeAt(0) ^ 42)).join(''));
+  }
+
+  function buildPlayerUrl(code) {
+    const loc = window.location;
+    const base = loc.pathname.replace(/\/admin\/?$/, '');
+    return loc.origin + base + '/v/?c=' + code;
+  }
+
+  function fmtDate(iso) {
+    const d = new Date(iso);
+    return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
+  }
+
+  function esc(s) {
+    return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '✓ Copiado';
+      btn.classList.add('ok');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('ok'); }, 2000);
+    });
+  }
+
+  // WhatsApp message
+  function waMsg(order, url) {
+    const name = order.name ? `Oi ${order.name}! ` : 'Olá! ';
+    const prod = order.orderType === 'personalized'
+      ? '\n\nSeu vídeo está sendo gravado com carinho 🎙️ Assim que estiver pronto, acesse o link abaixo.'
+      : '';
+    return encodeURIComponent(
+      `${name}🎉 Obrigada pela sua compra!\n\nSeu acesso exclusivo ao ASMR da Tha:${prod}\n\n🔗 Link: ${url}\n🔑 Senha: ${order.passwordPlain}\n\nQualquer dúvida é só chamar aqui 💕`
+    );
+  }
+
+  // Email body
+  function emailBody(order, url) {
+    const name = order.name ? `Oi ${order.name}!` : 'Olá!';
+    const prod = order.orderType === 'personalized'
+      ? '\n\nSeu vídeo está sendo gravado! Assim que estiver pronto, acesse o link abaixo.'
+      : '';
+    return encodeURIComponent(
+      `${name}\n\nObrigada pela compra 💕${prod}\n\nSeus dados de acesso:\n\n🔗 Link: ${url}\n🔑 Senha: ${order.passwordPlain}\n\nVocê tem acesso vitalício — guarde esses dados.\n\nCom carinho,\nTha ASMR`
+    );
+  }
+
+  // ── RENDER ───────────────────────────────────────────────
+  let currentFilter = 'all';
+
+  function renderStats(orders) {
+    const total   = orders.length;
+    const avail   = orders.filter(o => o.status === 'available').length;
+    const prod    = orders.filter(o => o.status === 'production').length;
+    const personal= orders.filter(o => o.orderType === 'personalized').length;
+    document.getElementById('statsRow').innerHTML = `
+      <div class="stat-card"><div class="stat-n">${total}</div><div class="stat-l">Total</div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--green)">${avail}</div><div class="stat-l">Disponíveis</div></div>
+      <div class="stat-card"><div class="stat-n" style="color:var(--orange)">${prod}</div><div class="stat-l">Em produção</div></div>
+      <div class="stat-card"><div class="stat-n" style="color:#b89cd8">${personal}</div><div class="stat-l">Personaliz.</div></div>`;
+  }
+
+  function renderOrders(filterOverride) {
+    const filter = filterOverride || currentFilter;
+    const orders = getOrders();
+    renderStats(orders);
+
+    let list = [...orders].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+    if (filter === 'catalog')      list = list.filter(o => o.orderType === 'catalog');
+    if (filter === 'personalized') list = list.filter(o => o.orderType === 'personalized');
+    if (filter === 'production')   list = list.filter(o => o.status === 'production');
+    if (filter === 'available')    list = list.filter(o => o.status === 'available');
+
+    const container = document.getElementById('orderList');
+    if (!list.length) { container.innerHTML = `<div class="empty">Nenhum pedido${filter !== 'all' ? ' neste filtro' : ' ainda'}.</div>`; return; }
+
+    container.innerHTML = list.map(order => {
+      const url = buildPlayerUrl(order.code);
+      const isPersonal = order.orderType === 'personalized';
+      const isProd     = order.status === 'production';
+      const contact    = [order.email && `📧 ${esc(order.email)}`, order.whatsapp && `📱 ${esc(order.whatsapp)}`].filter(Boolean).join(' &nbsp;·&nbsp; ');
+      const wa = order.whatsapp ? `<a class="action-btn btn-wa" href="https://wa.me/55${order.whatsapp.replace(/\D/g,'')}?text=${waMsg(order,url)}" target="_blank"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> WhatsApp</a>` : '';
+      const email = order.email ? `<a class="action-btn btn-email" href="mailto:${esc(order.email)}?subject=${encodeURIComponent('Seu acesso exclusivo — Tha ASMR ✨')}&body=${emailBody(order,url)}" target="_blank"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> E-mail</a>` : '';
+      const toggleBtn = isProd
+        ? `<button class="action-btn btn-activate" onclick="setStatus('${order.id}','available')"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Marcar disponível</button>`
+        : `<button class="action-btn btn-pause" onclick="setStatus('${order.id}','production')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Voltar p/ produção</button>`;
+      const ytSection = isPersonal && isProd ? `
+        <div class="yt-row">
+          <input class="yt-input" id="yt_${order.id}" placeholder="YouTube ID (ex: dQw4w9WgXcQ)">
+          <button class="yt-save" onclick="setVideoId('${order.id}')">Salvar e ativar</button>
+        </div>` : '';
+      const descSection = isPersonal && order.description ? `
+        <div class="card-desc"><div class="card-desc-label">Descrição do pedido</div>${esc(order.description)}</div>` : '';
+
+      return `<div class="order-card" id="card_${order.id}">
+        <div class="card-top">
+          <span class="badge ${isPersonal ? 'badge-personal' : 'badge-catalog'}">${isPersonal ? 'Personalizado' : 'Catálogo'}</span>
+          <span class="badge ${isProd ? 'badge-prod' : 'badge-avail'}">${isProd ? 'Em produção' : 'Disponível'}</span>
+          <span class="card-date">${fmtDate(order.createdAt)}</span>
+        </div>
+        <div class="card-name">${esc(order.name) || '<span style="color:var(--ink-faint);font-weight:400;">Sem nome</span>'}</div>
+        <div class="card-contact">${contact || '<span style="color:var(--ink-faint);">Sem contato informado</span>'}</div>
+        ${descSection}
+        <div style="margin-top:16px;">
+          <div class="access-row">
+            <div><div class="access-label">Link exclusivo</div><div class="access-val">${url}</div></div>
+            <button class="copy-btn" onclick="copyText('${url}', this)">Copiar</button>
+          </div>
+          <div class="access-row">
+            <div><div class="access-label">Senha</div><div class="access-val password">${esc(order.passwordPlain)}</div></div>
+            <button class="copy-btn" onclick="copyText('${esc(order.passwordPlain)}', this)">Copiar</button>
+          </div>
+        </div>
+        ${ytSection}
+        <div class="card-actions">
+          ${wa}${email}${toggleBtn}
+          <button class="action-btn btn-danger" onclick="deleteOrder('${order.id}')"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6M9 6V4h6v2"/></svg> Excluir</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // ── ACTIONS ──────────────────────────────────────────────
+  window.setStatus = function(id, status) {
+    const orders = getOrders();
+    const order  = orders.find(o => o.id === id);
+    if (!order) return;
+    order.status = status;
+    order.updatedAt = new Date().toISOString();
+    saveOrders(orders);
+    renderOrders();
+  };
+
+  window.setVideoId = function(id) {
+    const ytId = document.getElementById('yt_' + id)?.value.trim();
+    if (!ytId) return alert('Informe o YouTube ID do vídeo.');
+    const orders = getOrders();
+    const order  = orders.find(o => o.id === id);
+    if (!order) return;
+    order.videoEnc  = encodeVid(ytId);
+    order.status    = 'available';
+    order.updatedAt = new Date().toISOString();
+    saveOrders(orders);
+    renderOrders();
+  };
+
+  window.deleteOrder = function(id) {
+    if (!confirm('Excluir este pedido? Esta ação não pode ser desfeita.')) return;
+    saveOrders(getOrders().filter(o => o.id !== id));
+    renderOrders();
+  };
+
+  window.copyText = copyText;
+
+  // ── FILTERS ──────────────────────────────────────────────
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderOrders();
+    });
+  });
+
+  // ── LOGIN ──────────────────────────────────────────────
+  function doLogin() {
+    const val = document.getElementById('loginInput').value;
+    if (val === ADMIN_PASS) {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      renderOrders();
+    } else {
+      document.getElementById('loginInput').classList.add('error');
+      document.getElementById('loginError').textContent = 'Senha incorreta.';
+      document.getElementById('loginInput').value = '';
+      setTimeout(() => document.getElementById('loginInput').classList.remove('error'), 600);
+    }
+  }
+  document.getElementById('loginBtn').addEventListener('click', doLogin);
+  document.getElementById('loginInput').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    sessionStorage.removeItem(SESSION_KEY);
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('loginPage').style.display = 'flex';
+    document.getElementById('loginInput').value = '';
+  });
+
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    if (!confirm('Apagar TODOS os pedidos? Isso é irreversível.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    renderOrders();
+  });
+
+  // Auto-login if session exists
+  if (sessionStorage.getItem(SESSION_KEY)) {
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    renderOrders();
+  }
+</script>
+</body>
+</html>

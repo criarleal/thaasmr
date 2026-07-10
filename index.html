@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="https://criarleal.github.io/thaasmr//favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.png">
   <title>Tha ASMR - Conte&uacute;do exclusivo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -904,195 +904,130 @@
       justify-content: center;
     }
 
-    /* --- PIX POPUP --- */
-    .pix-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9000;
-      background: rgba(5, 6, 12, 0.85);
-      backdrop-filter: blur(18px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .4s var(--ease);
-    }
+    /* --- PURCHASE MODAL --- */
+    .pix-overlay { position:fixed; inset:0; z-index:9000; background:rgba(5,6,12,0.88); backdrop-filter:blur(18px); display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition:opacity .4s var(--ease); }
+    .pix-overlay.open { opacity:1; pointer-events:all; }
+    .pix-modal { background:var(--bg-deep); border:1px solid var(--line); border-radius:28px; padding:clamp(28px,5vw,48px); max-width:560px; width:100%; position:relative; transform:translateY(24px); transition:transform .4s var(--ease); max-height:90svh; overflow-y:auto; }
+    .pix-overlay.open .pix-modal { transform:translateY(0); }
+    .pix-close { position:absolute; top:18px; right:18px; width:36px; height:36px; border-radius:50%; border:1px solid var(--line); background:none; color:var(--ink-soft); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .3s var(--ease); flex-shrink:0; z-index:2; }
+    .pix-close:hover { border-color:var(--accent-dim); color:var(--ink); }
+    .pix-close svg { width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; }
+    .pix-title { font-family:var(--display); font-size:clamp(20px,3vw,26px); font-weight:400; font-style:italic; margin-bottom:6px; }
+    .pix-price { font-size:13px; color:var(--accent); letter-spacing:.08em; text-transform:uppercase; margin-bottom:24px; }
+    .pix-note { font-size:12px; color:var(--ink-faint); text-align:center; margin-top:16px; line-height:1.7; }
 
-    .pix-overlay.open {
-      opacity: 1;
-      pointer-events: all;
-    }
+    /* Steps */
+    .modal-step { display:none; }
+    .modal-step.active { display:block; }
 
-    .pix-modal {
-      background: var(--bg-deep);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: clamp(32px, 5vw, 56px);
-      max-width: 480px;
-      width: 100%;
-      position: relative;
-      transform: translateY(24px);
-      transition: transform .4s var(--ease);
-    }
+    /* Product cards */
+    .product-cards { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px; }
+    .product-card { border:1px solid var(--line); border-radius:18px; padding:20px 18px; cursor:pointer; transition:all .3s var(--ease); background:var(--bg-mid); }
+    .product-card:hover { border-color:var(--accent-dim); background:rgba(201,162,154,.05); }
+    .product-card.selected { border-color:var(--accent); background:rgba(201,162,154,.08); }
+    .pc-type { font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:10px; }
+    .pc-name { font-family:var(--display); font-size:17px; font-style:italic; font-weight:400; color:var(--ink); margin-bottom:8px; line-height:1.3; }
+    .pc-price { font-size:22px; font-weight:600; color:var(--accent); margin-bottom:10px; }
+    .pc-desc { font-size:12px; color:var(--ink-soft); line-height:1.6; }
+    @media(max-width:480px) { .product-cards { grid-template-columns:1fr; } }
 
-    .pix-overlay.open .pix-modal {
-      transform: translateY(0);
-    }
+    /* Form */
+    .form-field { margin-bottom:14px; }
+    .form-field label { display:block; font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:7px; }
+    .form-input { width:100%; background:var(--bg-mid); border:1px solid var(--line); border-radius:12px; padding:12px 16px; font-size:14px; color:var(--ink); font-family:var(--body); outline:none; transition:border-color .3s var(--ease); }
+    .form-input:focus { border-color:var(--accent-dim); }
+    .form-input.error { border-color:rgba(220,80,80,.6); }
+    .form-textarea { resize:vertical; min-height:80px; }
+    .form-note { font-size:12px; color:var(--ink-faint); margin-top:-6px; margin-bottom:14px; line-height:1.5; }
+    .form-error { font-size:13px; color:rgba(220,80,80,.85); min-height:18px; margin-top:4px; }
 
-    .pix-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1px solid var(--line);
+    /* Step nav */
+    .modal-nav { display:flex; align-items:center; justify-content:space-between; margin-top:22px; gap:12px; }
+    .btn-back { background:none; border:1px solid var(--line); border-radius:999px; padding:10px 20px; font-size:13px; font-family:var(--body); color:var(--ink-soft); cursor:pointer; transition:all .3s var(--ease); }
+    .btn-back:hover { border-color:var(--accent-dim); color:var(--ink); }
+    .btn-nav { padding:12px 24px; font-size:14px; }
+
+    /* Pix QR */
+    .pix-qr { width:170px; height:170px; margin:0 auto 20px; border-radius:14px; overflow:hidden; border:1px solid var(--line); background:#fff; display:flex; align-items:center; justify-content:center; }
+    .pix-qr img { width:100%; height:100%; object-fit:contain; display:block; }
+    .pix-copy-btn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; background:linear-gradient(135deg,var(--accent) 0%,#b07a72 100%); color:#fff; border:none; border-radius:999px; padding:15px 32px; font-size:15px; font-family:var(--body); font-weight:500; cursor:pointer; transition:transform .3s var(--ease),box-shadow .3s var(--ease); box-shadow:0 8px 32px rgba(201,162,154,.25); letter-spacing:.02em; margin-top:4px; }
+    .pix-copy-btn:hover { transform:translateY(-2px); box-shadow:0 14px 40px rgba(201,162,154,.4); }
+    .pix-copy-btn.copied { background:linear-gradient(135deg,#4a9e6a,#357a50); }
+
+    /* Success */
+    .success-field { background:var(--bg-mid); border:1px solid var(--line-soft); border-radius:14px; padding:14px 18px; margin-bottom:10px; }
+    .success-field-label { font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:6px; }
+    .success-field-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .success-field-val { font-size:13px; color:var(--ink-soft); word-break:break-all; flex:1; }
+    .success-field-val.pw { font-family:monospace; font-size:20px; letter-spacing:.14em; color:var(--accent); }
+    .copy-inline { background:none; border:1px solid var(--line); border-radius:8px; padding:5px 12px; font-size:11px; font-family:var(--body); color:var(--ink-soft); cursor:pointer; white-space:nowrap; flex-shrink:0; transition:all .3s var(--ease); }
+    .copy-inline:hover { border-color:var(--accent-dim); color:var(--ink); }
+
+    /* --- HAMBURGER --- */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
       background: none;
-      color: var(--ink-soft);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all .3s var(--ease);
-    }
-
-    .pix-close:hover {
-      border-color: var(--accent-dim);
-      color: var(--ink);
-    }
-
-    .pix-close svg {
-      width: 14px;
-      height: 14px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-    }
-
-    .pix-title {
-      font-family: var(--display);
-      font-size: clamp(20px, 3vw, 28px);
-      font-weight: 400;
-      font-style: italic;
-      margin-bottom: 6px;
-    }
-
-    .pix-price {
-      font-size: 13px;
-      color: var(--accent);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-
-    .pix-qr {
-      width: 180px;
-      height: 180px;
-      margin: 0 auto 28px;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .pix-qr img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-
-    .pix-label {
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .pix-code-wrap {
-      display: flex;
-      gap: 8px;
-    }
-
-    .pix-code {
-      flex: 1;
-      background: var(--bg-mid);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 12px 16px;
-      font-size: 11px;
-      color: var(--ink-soft);
-      font-family: monospace;
-      letter-spacing: 0.04em;
-      word-break: break-all;
-      user-select: all;
-    }
-
-    .pix-copy-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      background: linear-gradient(135deg, var(--accent) 0%, #b07a72 100%);
-      color: #fff;
       border: none;
-      border-radius: 999px;
-      padding: 16px 32px;
-      font-size: 15px;
-      font-family: var(--body);
-      font-weight: 500;
       cursor: pointer;
-      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
-      box-shadow: 0 8px 32px rgba(201, 162, 154, 0.25);
-      letter-spacing: 0.02em;
-      margin-top: 8px;
+      padding: 6px;
+      z-index: 41;
+      position: relative;
     }
-
-    .pix-copy-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(201, 162, 154, 0.40);
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: transform .35s var(--ease), opacity .35s var(--ease);
     }
-
-    .pix-copy-btn.copied {
-      background: linear-gradient(135deg, #4a9e6a 0%, #357a50 100%);
-    }
-
-    .pix-note {
-      font-size: 12px;
-      color: var(--ink-faint);
-      text-align: center;
-      margin-top: 20px;
-      line-height: 1.7;
-    }
+    .hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
     @media (max-width: 860px) {
       .nav-links {
         display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 38;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 36px;
+        background: rgba(10, 12, 18, 0.97);
+        backdrop-filter: blur(20px);
       }
-
+      .nav-links.mobile-open {
+        display: flex;
+      }
+      .nav-links a {
+        font-size: 20px;
+        letter-spacing: 0.06em;
+      }
+      .nav-cta {
+        padding: 14px 32px;
+        font-size: 15px;
+      }
+      .hamburger {
+        display: flex;
+      }
       .space-grid {
         grid-template-columns: 1fr;
         gap: 48px;
       }
-
       .ritual {
         grid-template-columns: 1fr;
         gap: 40px;
       }
-
       .trust-grid {
         grid-template-columns: 1fr;
       }
-
       .space-img-box {
         aspect-ratio: 16/9;
       }
@@ -1115,12 +1050,35 @@
 
   <header id="siteHeader">
     <div class="logo"><a href="#">Tha ASMR</a></div>
-    <nav class="nav-links">
-      <a href="#espaco">O que esperar</a>
-      <a href="#ritual">Como funciona</a>
-      <a href="#ritual" class="nav-cta">Garantir acesso</a>
+    <nav class="nav-links" id="mobileNav">
+      <a href="#espaco" class="mobile-nav-link">O que esperar</a>
+      <a href="#ritual" class="mobile-nav-link">Como funciona</a>
+      <a href="#ritual" class="nav-cta mobile-nav-link">Garantir acesso</a>
     </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </header>
+
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const navLinks = document.querySelectorAll('.mobile-nav-link');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('mobile-open');
+      hamburger.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('mobile-open');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
 
   <section class="hero">
     <div class="hero-video-wrap">
@@ -1307,36 +1265,122 @@
     </div>
   </section>
 
-  <!-- PIX POPUP -->
-  <div class="pix-overlay" id="pixOverlay" role="dialog" aria-modal="true" aria-label="Pagamento via Pix">
+  <!-- PURCHASE MODAL -->
+  <div class="pix-overlay" id="pixOverlay" role="dialog" aria-modal="true" aria-label="Comprar acesso">
     <div class="pix-modal">
       <button class="pix-close" id="pixClose" aria-label="Fechar">
-        <svg viewBox="0 0 24 24">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-      <p class="pix-title">Pague com Pix</p>
-      <p class="pix-price">R$ 150,00 &mdash; acesso vital&iacute;cio</p>
-      <div class="pix-qr">
-        <img
-          src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020126580014BR.GOV.BCB.PIX0136exemplo-chave-pix-ficticia5204000053039865406150.005802BR5913Tha+ASMR6009Sao+Paulo62070503***6304ABCD"
-          alt="QR Code Pix" loading="lazy">
+
+      <!-- Step 1: Select Type -->
+      <div class="modal-step active" id="step1">
+        <p class="pix-title">Escolha seu acesso</p>
+        <p class="pix-note" style="text-align:left; margin-top:4px;">Selecione qual experiência ASMR você deseja adquirir.</p>
+        
+        <div class="product-cards">
+          <div class="product-card selected" id="optCatalog">
+            <div class="pc-type">Catálogo</div>
+            <div class="pc-name">Acesso Imediato</div>
+            <div class="pc-price">R$ 150</div>
+            <div class="pc-desc">O vídeo "Exclusivo para Pagantes" liberado na mesma hora. Acesso vitalício.</div>
+          </div>
+          <div class="product-card" id="optPersonal">
+            <div class="pc-type">Sob medida</div>
+            <div class="pc-name">Personalizado</div>
+            <div class="pc-price">R$ 200</div>
+            <div class="pc-desc">Gravado exclusivamente para você. Entregue em até 7 dias após o pagamento.</div>
+          </div>
+        </div>
+        
+        <div class="modal-nav" style="justify-content:flex-end;">
+          <button class="pix-copy-btn btn-nav" style="width:auto; margin:0;" id="btnToStep2">Continuar &rarr;</button>
+        </div>
       </div>
-      <button class="pix-copy-btn" id="pixCopyBtn">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round">
-          <rect x="9" y="9" width="13" height="13" rx="2" />
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-        </svg>
-        Copiar c&oacute;digo Pix
-      </button>
-      <!-- hidden, used for clipboard -->
-      <div id="pixCode" style="display:none;">
-        00020126580014BR.GOV.BCB.PIX0136exemplo-chave-pix-ficticia5204000053039865406150.005802BR5913ThaASMR6009SaoPaulo62070503***6304ABCD
+
+      <!-- Step 2: Form -->
+      <div class="modal-step" id="step2">
+        <p class="pix-title">Seus dados</p>
+        <p class="pix-note" style="text-align:left; margin-top:4px; margin-bottom:20px;">Por onde enviaremos seu acesso? Preencha pelo menos um.</p>
+        
+        <div class="form-field">
+          <label>Seu Nome (opcional)</label>
+          <input type="text" id="fName" class="form-input" placeholder="Como quer ser chamado?">
+        </div>
+        
+        <div class="form-field">
+          <label>WhatsApp</label>
+          <input type="text" id="fWhats" class="form-input" placeholder="(11) 99999-9999">
+        </div>
+        
+        <div class="form-field">
+          <label>E-mail</label>
+          <input type="email" id="fEmail" class="form-input" placeholder="seu@email.com">
+        </div>
+        
+        <div class="form-field" id="personalDescBox" style="display:none; margin-top:20px;">
+          <label>Como você quer o vídeo?</label>
+          <p class="form-note">Descreva os gatilhos, o tom de voz e o que mais desejar.</p>
+          <textarea id="fDesc" class="form-input form-textarea" placeholder="Ex: sussurros bem baixinhos, tapping em madeira, duração..."></textarea>
+        </div>
+        
+        <p class="form-error" id="formError"></p>
+        
+        <div class="modal-nav">
+          <button class="btn-back" id="btnBackTo1">&larr; Voltar</button>
+          <button class="pix-copy-btn btn-nav" style="width:auto; margin:0;" id="btnToStep3">Gerar Pix</button>
+        </div>
       </div>
-      <p class="pix-note">Ap&oacute;s o pagamento, a senha de acesso ao v&iacute;deo<br>ser&aacute; enviada em
-        at&eacute; <strong>alguns minutos</strong>.</p>
+
+      <!-- Step 3: Payment (Pix) -->
+      <div class="modal-step" id="step3">
+        <p class="pix-title">Pague com Pix</p>
+        <p class="pix-price" id="pixDisplayPrice">R$ 150 &mdash; acesso vitalício</p>
+        <div class="pix-qr">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020126580014BR.GOV.BCB.PIX0136exemplo-chave-pix-ficticia" alt="QR Code Pix" loading="lazy">
+        </div>
+        <button class="pix-copy-btn" id="pixCopyBtn">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copiar código Pix
+        </button>
+        <div id="pixCode" style="display:none;">00020126580014BR.GOV.BCB.PIX0136exemplo-chave-pix-ficticia</div>
+        
+        <p class="pix-note" style="margin-top:24px;">Após o pagamento, o acesso será liberado.</p>
+        
+        <!-- Simulate Payment Button (just for this demo) -->
+        <button id="demoPayBtn" style="width:100%; margin-top:20px; background:rgba(74,158,106,0.1); color:#4a9e6a; border:1px solid rgba(74,158,106,0.3); border-radius:12px; padding:10px; cursor:pointer; font-size:12px; transition:background .3s;">[Demo] Simular pagamento confirmado</button>
+      </div>
+
+      <!-- Step 4: Success -->
+      <div class="modal-step" id="step4">
+        <div style="text-align:center;">
+          <div style="width:64px;height:64px;border-radius:50%;background:rgba(74,158,106,0.15);border:1px solid rgba(74,158,106,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4a9e6a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <p class="pix-title" id="successTitle">Acesso criado!</p>
+          <p class="pix-note" id="successSub" style="margin-bottom:24px; font-size:14px;">Guarde o link e a senha abaixo. Eles são o seu acesso vitalício.</p>
+          
+          <div style="text-align:left;">
+            <div class="success-field">
+              <div class="success-field-label">Seu Link Exclusivo</div>
+              <div class="success-field-row">
+                <div class="success-field-val" id="resUrl"></div>
+                <button class="copy-inline" id="copyUrlBtn">Copiar</button>
+              </div>
+            </div>
+            
+            <div class="success-field" style="margin-bottom:24px;">
+              <div class="success-field-label">Sua Senha</div>
+              <div class="success-field-row">
+                <div class="success-field-val pw" id="resPw"></div>
+                <button class="copy-inline" id="copyPwBtn">Copiar</button>
+              </div>
+            </div>
+          </div>
+          
+          <a href="#" id="watchNowBtn" target="_blank" class="pix-copy-btn" style="text-decoration:none;">Acessar página do vídeo &rarr;</a>
+        </div>
+      </div>
+      
     </div>
   </div>
 
@@ -1486,70 +1530,168 @@
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && theaterOn) theaterBtn.click(); });
 
-    // PIX POPUP
+    // --- PURCHASE MODAL FLOW ---
     const pixOverlay = document.getElementById('pixOverlay');
     const pixClose = document.getElementById('pixClose');
-    const pixCopyBtn = document.getElementById('pixCopyBtn');
-    const pixCode = document.getElementById('pixCode');
+    const steps = [
+      document.getElementById('step1'),
+      document.getElementById('step2'),
+      document.getElementById('step3'),
+      document.getElementById('step4')
+    ];
+
+    function showStep(idx) {
+      steps.forEach((s, i) => s.classList.toggle('active', i === idx));
+    }
 
     function openPix() {
+      showStep(0); // always reset to step 1
+      document.getElementById('fName').value = '';
+      document.getElementById('fWhats').value = '';
+      document.getElementById('fEmail').value = '';
+      document.getElementById('fDesc').value = '';
+      document.getElementById('formError').textContent = '';
       pixOverlay.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
+
     function closePix() {
       pixOverlay.classList.remove('open');
       document.body.style.overflow = '';
     }
 
+    // Open triggers
     ['heroBuyBtn', 'espacoBuyBtn', 'ritualBuyBtn'].forEach(id => {
       const el = document.getElementById(id);
-      if (el) el.addEventListener('click', openPix);
+      if (el) el.addEventListener('click', e => { e.preventDefault(); openPix(); });
     });
 
     pixClose.addEventListener('click', closePix);
     pixOverlay.addEventListener('click', e => { if (e.target === pixOverlay) closePix(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closePix(); });
 
+    // --- STEP 1: Product Selection ---
+    let selectedType = 'catalog'; // 'catalog' | 'personalized'
+    const optCat = document.getElementById('optCatalog');
+    const optPers = document.getElementById('optPersonal');
+    const descBox = document.getElementById('personalDescBox');
+
+    optCat.addEventListener('click', () => {
+      selectedType = 'catalog';
+      optCat.classList.add('selected');
+      optPers.classList.remove('selected');
+      descBox.style.display = 'none';
+      document.getElementById('pixDisplayPrice').innerHTML = 'R$ 150 &mdash; acesso vitalício';
+    });
+
+    optPers.addEventListener('click', () => {
+      selectedType = 'personalized';
+      optPers.classList.add('selected');
+      optCat.classList.remove('selected');
+      descBox.style.display = 'block';
+      document.getElementById('pixDisplayPrice').innerHTML = 'R$ 200 &mdash; acesso vitalício';
+    });
+
+    document.getElementById('btnToStep2').addEventListener('click', () => showStep(1));
+    document.getElementById('btnBackTo1').addEventListener('click', () => showStep(0));
+
+    // --- STEP 2: Form ---
+    document.getElementById('btnToStep3').addEventListener('click', () => {
+      const whats = document.getElementById('fWhats').value.trim();
+      const email = document.getElementById('fEmail').value.trim();
+      const err = document.getElementById('formError');
+      if (!whats && !email) {
+        err.textContent = 'Por favor, informe pelo menos o WhatsApp ou E-mail.';
+        return;
+      }
+      err.textContent = '';
+      showStep(2);
+    });
+
+    // --- STEP 3: Payment ---
+    const pixCopyBtn = document.getElementById('pixCopyBtn');
+    const pixCode = document.getElementById('pixCode');
     pixCopyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(pixCode.textContent.trim()).then(() => {
-        // Step 1: copied feedback
         pixCopyBtn.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copiado!`;
         pixCopyBtn.classList.add('copied');
-
-        // Step 2: simulate payment confirmed after 1.8s
-        setTimeout(() => {
-          const modal = document.querySelector('.pix-modal');
-          modal.innerHTML = `
-            <div style="text-align:center;padding:20px 0;">
-              <div style="width:64px;height:64px;border-radius:50%;background:rgba(74,158,106,0.15);border:1px solid rgba(74,158,106,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
-                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4a9e6a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <p style="font-family:var(--display);font-size:clamp(18px,3vw,26px);font-weight:400;font-style:italic;margin-bottom:8px;color:var(--ink);">Pagamento confirmado!</p>
-              <p style="font-size:13px;color:var(--ink-soft);margin-bottom:22px;line-height:1.6;">Sua senha de acesso exclusivo:</p>
-              <div style="font-family:monospace;font-size:24px;letter-spacing:0.18em;color:var(--accent);background:var(--bg-mid);border:1px solid var(--line);border-radius:14px;padding:16px 32px;display:inline-block;margin-bottom:24px;">thaasmr2025</div>
-              <p style="font-size:12px;color:var(--ink-faint);">Levando voc&ecirc; ao v&iacute;deo...</p>
-            </div>`;
-
-          // Step 3: after 3s close popup, fill password, scroll to video
-          setTimeout(() => {
-            closePix();
-            const inp = document.getElementById('gateInput');
-            if (inp) {
-              inp.value = 'thaasmr2025';
-              const section = document.getElementById('videoProtegido');
-              if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              setTimeout(() => inp.focus(), 700);
-            }
-          }, 3000);
-        }, 1800);
-      }).catch(() => {
-        pixCopyBtn.textContent = 'Erro ao copiar';
-        setTimeout(() => {
-          pixCopyBtn.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar c&oacute;digo Pix`;
-          pixCopyBtn.classList.remove('copied');
-        }, 2200);
       });
     });
+
+    // --- DEMO PAYMENT SUCCESS ---
+    function genRandomStr(len) {
+      return Math.random().toString(36).substring(2, 2 + len);
+    }
+    
+    async function hashStr(s) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+      return btoa(String.fromCharCode(...new Uint8Array(buf)));
+    }
+
+    document.getElementById('demoPayBtn').addEventListener('click', async () => {
+      // 1. Generate access
+      const code = genRandomStr(8);
+      const password = genRandomStr(6).toUpperCase();
+      const passHash = await hashStr(password);
+      
+      // 2. Create Order in LocalStorage
+      const orders = JSON.parse(localStorage.getItem('thaAsmrOrders') || '[]');
+      
+      // The current catalog video encrypted ID from the page (we will just reuse the dummy one or a real one)
+      // Since this is a demo, we encode a dummy or the actual youtube id 'AnvfmaVpZVU'
+      const encodeVid = (id) => btoa([...id].map(c => String.fromCharCode(c.charCodeAt(0) ^ 42)).join(''));
+      
+      const newOrder = {
+        id: crypto.randomUUID(),
+        code: code,
+        passwordPlain: password,
+        passwordHash: passHash,
+        orderType: selectedType,
+        status: selectedType === 'catalog' ? 'available' : 'production',
+        videoEnc: selectedType === 'catalog' ? encodeVid('AnvfmaVpZVU') : null,
+        name: document.getElementById('fName').value.trim(),
+        whatsapp: document.getElementById('fWhats').value.trim(),
+        email: document.getElementById('fEmail').value.trim(),
+        description: document.getElementById('fDesc').value.trim(),
+        amount: selectedType === 'catalog' ? 150 : 200,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      
+      orders.push(newOrder);
+      localStorage.setItem('thaAsmrOrders', JSON.stringify(orders));
+      
+      // 3. Show Success Step
+      const playerUrl = window.location.origin + window.location.pathname.replace(/index\.html$/, '') + 'v/?c=' + code;
+      
+      document.getElementById('resUrl').textContent = playerUrl;
+      document.getElementById('resPw').textContent = password;
+      document.getElementById('watchNowBtn').href = playerUrl;
+      
+      if (selectedType === 'personalized') {
+        document.getElementById('successTitle').textContent = 'Pedido confirmado!';
+        document.getElementById('successSub').textContent = 'Seu vídeo está na fila de gravação. Guarde o link e senha abaixo, você será notificado por lá quando estiver pronto.';
+      } else {
+        document.getElementById('successTitle').textContent = 'Acesso liberado!';
+        document.getElementById('successSub').textContent = 'Guarde o link e a senha abaixo. Eles são o seu acesso vitalício.';
+      }
+      
+      showStep(3);
+    });
+
+    // --- COPY UTILS FOR STEP 4 ---
+    function setupCopy(btnId, valId) {
+      const btn = document.getElementById(btnId);
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(document.getElementById(valId).textContent).then(() => {
+          const old = btn.textContent;
+          btn.textContent = 'Copiado';
+          setTimeout(() => btn.textContent = old, 2000);
+        });
+      });
+    }
+    setupCopy('copyUrlBtn', 'resUrl');
+    setupCopy('copyPwBtn', 'resPw');
   </script>
 
 </body>
