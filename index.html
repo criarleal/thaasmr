@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/favicon.png">
+  <title>Tha ASMR - Conte&uacute;do exclusivo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #0a0c12;
+      --bg-deep: #101320;
+      --bg-mid: #171b2b;
+      --line: rgba(168, 172, 192, 0.14);
+      --line-soft: rgba(168, 172, 192, 0.08);
+      --ink: #eeeae1;
+      --ink-soft: #9a9fb8;
+      --ink-faint: #5d6180;
+      --accent: #c9a29a;
+      --accent-dim: rgba(201, 162, 154, 0.35);
+      --ease: cubic-bezier(.16, .8, .24, 1);
+      --display: 'Fraunces', serif;
+      --body: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    ::selection {
+      background: var(--accent-dim);
+      color: var(--ink);
+    }
+
+    body {
+      background: var(--bg-void);
+      color: var(--ink);
+      font-family: var(--body);
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    :focus-visible {
+      outline: 1px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .breath-field {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(720px 720px at var(--mx, 50%) var(--my, 30%), rgba(201, 162, 154, 0.10), transparent 60%), radial-gradient(1200px 800px at 20% 0%, rgba(90, 100, 150, 0.14), transparent 55%), radial-gradient(1000px 900px at 85% 40%, rgba(60, 50, 70, 0.16), transparent 60%);
+      animation: breathe 9s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+
+      0%,
+      100% {
+        opacity: 0.7;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.035;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    section,
+    header,
+    footer {
+      position: relative;
+      z-index: 2;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 clamp(24px, 5vw, 64px);
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      padding: 26px clamp(24px, 5vw, 64px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background .5s var(--ease), border-color .5s var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+
+    header.scrolled {
+      background: rgba(10, 12, 18, 0.72);
+      backdrop-filter: blur(14px) saturate(120%);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .logo {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      transition: color .3s var(--ease);
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .nav-cta {
+      border: 1px solid var(--line);
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--ink) !important;
+      transition: border-color .3s var(--ease), background .3s var(--ease);
+    }
+
+    .nav-cta:hover {
+      border-color: var(--accent-dim);
+      background: rgba(201, 162, 154, 0.06);
+    }
+
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100svh;
+      padding-top: 120px;
+      padding-bottom: 80px;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding-left: clamp(24px, 5vw, 64px);
+      padding-right: clamp(24px, 5vw, 64px);
+    }
+
+    .hero-video-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.2s var(--ease);
+    }
+
+    .hero-video-wrap video.loaded {
+      opacity: 1;
+    }
+
+    .hero-video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10, 12, 18, 0.55) 0%, rgba(10, 12, 18, 0.30) 50%, rgba(10, 12, 18, 0.80) 100%), linear-gradient(to right, rgba(10, 12, 18, 0.60) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    h1.headline {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(44px, 8vw, 108px);
+      line-height: 0.98;
+      letter-spacing: -0.01em;
+      max-width: 14ch;
+      transition: font-variation-settings .1s linear;
+    }
+
+    h1.headline em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 300;
+    }
+
+    .hero-sub {
+      max-width: 42ch;
+      margin-top: 34px;
+      color: var(--ink-soft);
+      font-size: 17px;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      margin-top: 52px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--bg-void);
+      padding: 16px 34px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: transform .4s var(--ease), background .4s var(--ease);
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: var(--accent);
+    }
+
+    .link-quiet {
+      font-size: 14px;
+      color: var(--ink-soft);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 3px;
+      transition: color .3s var(--ease), border-color .3s var(--ease);
+    }
+
+    .link-quiet:hover {
+      color: var(--ink);
+      border-color: var(--ink-faint);
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 40px;
+      left: clamp(24px, 5vw, 64px);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .scroll-cue .line {
+      width: 1px;
+      height: 34px;
+      background: linear-gradient(var(--ink-faint), transparent);
+      animation: cue 2.4s ease-in-out infinite;
+    }
+
+    @keyframes cue {
+      0% {
+        transform: scaleY(0.4);
+        opacity: .3;
+      }
+
+      50% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scaleY(0.4);
+        opacity: .3;
+      }
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 44px;
+      flex-wrap: wrap;
+    }
+
+    .section-num {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: var(--ink-faint);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    h2.section-title {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(30px, 4vw, 52px);
+      letter-spacing: -0.01em;
+      max-width: 16ch;
+    }
+
+    .section-note {
+      max-width: 34ch;
+      color: var(--ink-soft);
+      font-size: 15px;
+      font-weight: 300;
+    }
+
+    section {
+      padding: clamp(56px, 8vw, 96px) 0;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--line-soft);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 1s var(--ease), transform 1s var(--ease);
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .space-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .space-copy p {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+      max-width: 46ch;
+    }
+
+    .space-copy p strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .space-copy .notice-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent-dim);
+      padding: 8px 16px;
+      border-radius: 999px;
+      margin-top: 8px;
+    }
+
+    .space-copy .notice-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .space-img-box {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      aspect-ratio: 4/5;
+    }
+
+    .space-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.9s var(--ease);
+    }
+
+    .space-img-box:hover img {
+      transform: scale(1.04);
+    }
+
+    .space-img-box::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10, 12, 18, 0.55) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .ritual {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .ritual-steps {
+      position: relative;
+    }
+
+    .ritual-steps::before {
+      content: '';
+      position: absolute;
+      left: 27px;
+      top: 10px;
+      bottom: 10px;
+      width: 1px;
+      background: linear-gradient(var(--line), transparent);
+    }
+
+    .step {
+      display: flex;
+      gap: 28px;
+      padding: 0 0 64px;
+      position: relative;
+    }
+
+    .step:last-child {
+      padding-bottom: 0;
+    }
+
+    .step-mark {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--accent);
+      background: var(--bg-void);
+    }
+
+    .step-body h3 {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .step-body p {
+      color: var(--ink-soft);
+      font-weight: 300;
+      font-size: 15.5px;
+      max-width: 46ch;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line-soft);
+      border: 1px solid var(--line-soft);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .trust-cell {
+      background: var(--bg-deep);
+      padding: 44px 36px;
+    }
+
+    .trust-cell h4 {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 20px;
+      margin-bottom: 14px;
+      color: var(--ink);
+    }
+
+    .trust-cell p {
+      color: var(--ink-soft);
+      font-size: 14.5px;
+      font-weight: 300;
+    }
+
+    .video-section {
+      padding: 0;
+      position: relative;
+      background: #000;
+    }
+
+    .video-gate {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 56vw;
+      max-height: 90vh;
+      background: #000;
+      padding: clamp(40px, 8vw, 80px);
+    }
+
+    .gate-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      color: var(--accent);
+    }
+
+    .gate-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .gate-title {
+      font-family: var(--display);
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 400;
+      font-style: italic;
+      margin-bottom: 8px;
+      color: var(--ink);
+      text-align: center;
+    }
+
+    .gate-sub {
+      font-size: 14px;
+      color: var(--ink-faint);
+      text-align: center;
+      margin-bottom: 32px;
+      max-width: 32ch;
+      font-weight: 300;
+    }
+
+    .gate-form {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .gate-input {
+      background: var(--bg-mid);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 13px 22px;
+      font-size: 14px;
+      color: var(--ink);
+      font-family: var(--body);
+      outline: none;
+      width: 220px;
+      transition: border-color .3s var(--ease);
+      letter-spacing: 0.08em;
+    }
+
+    .gate-input:focus {
+      border-color: var(--accent-dim);
+    }
+
+    .gate-input.error {
+      border-color: rgba(220, 80, 80, 0.6);
+      animation: shake .4s var(--ease);
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-6px);
+      }
+
+      75% {
+        transform: translateX(6px);
+      }
+    }
+
+    .gate-btn {
+      background: var(--ink);
+      color: var(--bg-void);
+      border: none;
+      border-radius: 999px;
+      padding: 13px 26px;
+      font-size: 14px;
+      font-family: var(--body);
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform .3s var(--ease), background .3s var(--ease);
+    }
+
+    .gate-btn:hover {
+      transform: translateY(-1px);
+      background: var(--accent);
+    }
+
+    .gate-error {
+      font-size: 13px;
+      color: rgba(220, 80, 80, 0.85);
+      margin-top: 14px;
+      min-height: 18px;
+      text-align: center;
+    }
+
+    .video-player-wrap {
+      display: none;
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+    }
+
+    .video-player-wrap.active {
+      display: block;
+    }
+
+    #videoIframeSlot {
+      width: 100%;
+      height: 100%;
+    }
+
+    #videoIframeSlot iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .video-overlay-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(100% - 140px);
+      height: 52px;
+      z-index: 5;
+      pointer-events: all;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+    }
+
+    .video-overlay-br {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 270px;
+      height: 48px;
+      z-index: 5;
+      pointer-events: all;
+      cursor: default;
+    }
+
+    .theater-bar {
+      display: none;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 10px 18px;
+      background: #000;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .theater-bar.active {
+      display: flex;
+    }
+
+    .theater-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-family: var(--body);
+      cursor: pointer;
+      transition: all .3s var(--ease);
+    }
+
+    .theater-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      flex-shrink: 0;
+    }
+
+    .theater-btn:hover {
+      border-color: var(--accent-dim);
+      color: var(--ink);
+    }
+
+    .theater-mode .video-section {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #000;
+    }
+
+    .theater-mode .video-player-wrap {
+      max-height: calc(100vh - 54px);
+      aspect-ratio: 16/9;
+    }
+
+    .theater-mode .theater-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    footer {
+      padding: 70px 0 46px;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 40px;
+      border-top: 1px solid var(--line-soft);
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--ink-soft);
+      transition: color .3s var(--ease);
+    }
+
+    .footer-links a:hover {
+      color: var(--ink);
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--ink-faint);
+    }
+
+    /* --- LOGO --- */
+    .logo a {
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 23px;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+      transition: opacity .3s var(--ease);
+    }
+
+    .logo a:hover {
+      opacity: 0.75;
+    }
+
+    /* --- HERO AUDIO CONTROL --- */
+    .hero-audio-btn {
+      position: absolute;
+      bottom: 44px;
+      right: clamp(24px, 5vw, 64px);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(10, 12, 18, 0.55);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 16px 8px 12px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: all .3s var(--ease);
+    }
+
+    .hero-audio-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .hero-audio-btn:hover {
+      border-color: var(--accent-dim);
+      color: var(--ink);
+      background: rgba(10, 12, 18, 0.75);
+    }
+
+    /* --- BUY BUTTON --- */
+    .btn-buy {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--accent) 0%, #b07a72 100%);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 15px 32px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--body);
+      cursor: pointer;
+      transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+      box-shadow: 0 8px 32px rgba(201, 162, 154, 0.25);
+      letter-spacing: 0.02em;
+    }
+
+    .btn-buy:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(201, 162, 154, 0.40);
+    }
+
+    .btn-buy svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .ritual-cta {
+      margin-top: 48px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* --- PIX POPUP --- */
+    .pix-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: rgba(5, 6, 12, 0.85);
+      backdrop-filter: blur(18px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s var(--ease);
+    }
+
+    .pix-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .pix-modal {
+      background: var(--bg-deep);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: clamp(32px, 5vw, 56px);
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      transform: translateY(24px);
+      transition: transform .4s var(--ease);
+    }
+
+    .pix-overlay.open .pix-modal {
+      transform: translateY(0);
+    }
+
+    .pix-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: none;
+      color: var(--ink-soft);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .3s var(--ease);
+    }
+
+    .pix-close:hover {
+      border-color: var(--accent-dim);
+      color: var(--ink);
+    }
+
+    .pix-close svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    .pix-title {
+      font-family: var(--display);
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 400;
+      font-style: italic;
+      margin-bottom: 6px;
+    }
+
+    .pix-price {
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .pix-qr {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 28px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pix-qr img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .pix-label {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .pix-code-wrap {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pix-code {
+      flex: 1;
+      background: var(--bg-mid);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 11px;
+      color: var(--ink-soft);
+      font-family: monospace;
+      letter-spacing: 0.04em;
+      word-break: break-all;
+      user-select: all;
+    }
+
+    .pix-copy-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent) 0%, #b07a72 100%);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 16px 32px;
+      font-size: 15px;
+      font-family: var(--body);
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+      box-shadow: 0 8px 32px rgba(201, 162, 154, 0.25);
+      letter-spacing: 0.02em;
+      margin-top: 8px;
+    }
+
+    .pix-copy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(201, 162, 154, 0.40);
+    }
+
+    .pix-copy-btn.copied {
+      background: linear-gradient(135deg, #4a9e6a 0%, #357a50 100%);
+    }
+
+    .pix-note {
+      font-size: 12px;
+      color: var(--ink-faint);
+      text-align: center;
+      margin-top: 20px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+
+      .space-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .ritual {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .space-img-box {
+        aspect-ratio: 16/9;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="breath-field" id="breathField"></div>
+  <div class="grain"></div>
+
+  <header id="siteHeader">
+    <div class="logo"><a href="#">Tha ASMR</a></div>
+    <nav class="nav-links">
+      <a href="#espaco">O que esperar</a>
+      <a href="#ritual">Como funciona</a>
+      <a href="#ritual" class="nav-cta">Garantir acesso</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-video-wrap">
+      <video id="heroVideo" autoplay muted loop playsinline preload="auto">
+        <source src="video-hero.mp4" type="video/mp4">
+      </video>
+      <div class="hero-video-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <h1 class="headline" id="heroHeadline">Tha ASMR<br><em>Proibid&atilde;o!</em></h1>
+      <p class="hero-sub">Espa&ccedil;o exclusivo para conte&uacute;dos pro&iacute;bidos pelo YouTube e para quem quer
+        apoiar o meu trabalho.</p>
+      <div class="hero-actions">
+        <button class="btn-buy" id="heroBuyBtn">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+            <path d="M12 8v4l3 3" />
+          </svg>
+          Quero meu Exclusivo
+        </button>
+        <a href="#ritual" class="link-quiet">Como funciona</a>
+      </div>
+      <div class="scroll-cue"><span class="line"></span> role</div>
+      <button class="hero-audio-btn" id="heroMuteBtn" aria-label="Silenciar v&iacute;deo">
+        <svg id="muteIcon" viewBox="0 0 24 24">
+          <path d="M11 5 6 9H2v6h4l5 4V5z" />
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+        </svg>
+        <span id="muteLbl">Silenciar</span>
+      </button>
+    </div>
+  </section>
+
+  <section id="espaco">
+    <div class="wrap">
+      <div class="space-grid">
+        <div class="space-copy reveal">
+          <p>Este &eacute; um espa&ccedil;o feito para quem quer <strong>apoiar o meu trabalho como youtuber</strong> e,
+            ao mesmo tempo, ter acesso a conte&uacute;dos exclusivos que simplesmente o YouTube n&atilde;o permite.</p>
+          <p>Aqui voce encontra <strong>ASMR normal:</strong> spit painting, lens licking, mic nibbling entre outros
+            tipos de gatilhos. A diferen&ccedil;a &eacute; que o YouTube n&atilde;o permite postar esse tipo de
+            v&iacute;deo sem desmonetizar ou restringir o alcance, mesmo sem nenhum elemento adulto.</p>
+          <p><strong>N&atilde;o h&aacute; nada provocativo, sensual ou expl&iacute;cito aqui.</strong> Nada do tipo.
+            &Eacute; s&oacute; ASMR de verdade, num lugar onde o algoritmo n&atilde;o interfere e o seu apoio chega
+            diretamente at&eacute; mim.</p>
+          <button class="btn-buy" id="espacoBuyBtn" style="margin-top: 28px;">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+              <path d="M12 8v4l3 3" />
+            </svg>
+            Garantir meu Exclusivo
+          </button>
+        </div>
+        <div class="space-img-box reveal">
+          <img src="sessao-01.webp" alt="Tha ASMR" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="divider"></div>
+  </div>
+
+  <section id="ritual">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <h2 class="section-title">Como Funciona?</h2>
+        </div>
+      </div>
+      <div class="ritual">
+        <div class="reveal">
+          <p class="section-note">O ASMR personalizado volta em breve &mdash; pausei por agenda cheia e
+            viagem.<br><br>Mas enquanto isso, voc&ecirc; pode acessar meu <strong style="color:var(--ink);">EXCLUSIVO
+              PARA PAGANTES</strong>:<br><br><strong style="color:var(--accent);font-style:italic;">10 minutos de ASMR
+              puro.</strong><br>5 min de Lens Licking + 5 min de Mic Licking<br><em>sem m&atilde;o na frente. Sem
+              an&uacute;ncios. Sem cortes.</em><br><br>Tudo isso por <strong style="color:var(--ink);">R$ 150</strong>
+            &mdash; com acesso vital&iacute;cio.</p>
+        </div>
+        <div class="ritual-steps">
+          <div class="step reveal">
+            <div class="step-mark">01</div>
+            <div class="step-body">
+              <h3>Comprar</h3>
+              <p>Voc&ecirc; clica em comprar e um pix copia e cola e um QR code s&atilde;o gerados pelo Mercado Pago
+                j&aacute; com o valor correto. &Eacute; 100% seguro!</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div class="step-mark">02</div>
+            <div class="step-body">
+              <h3>Pagar</h3>
+              <p>Voc&ecirc; efetua o pagamento do pix pelo banco da sua prefer&ecirc;ncia e em poucos segundos o
+                pagamento &eacute; identificado pelo site.</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div class="step-mark">03</div>
+            <div class="step-body">
+              <h3>Assistir</h3>
+              <p>Voc&ecirc; recebe uma senha exclusiva para acessar o v&iacute;deo NA MESMA HORA! Voc&ecirc;
+                poder&aacute; assistir quantas vezes quiser, para sempre, sem limites.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ritual-cta reveal">
+        <button class="btn-buy" id="ritualBuyBtn">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+            <path d="M12 8v4l3 3" />
+          </svg>
+          Aproveitar Promo&ccedil;&atilde;o
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div id="compra"></div>
+
+  <section class="video-section" id="videoProtegido">
+    <div class="video-gate" id="videoGate"
+      style="background-image: url('thumb.jpg'); background-size: cover; background-position: center; position: relative;">
+      <div style="position:absolute;inset:0;background:rgba(10,12,18,0.92);z-index:0;"></div>
+      <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;">
+        <div class="gate-icon">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+        </div>
+        <p class="gate-title">Acesso exclusivo</p>
+        <p class="gate-sub">Digite a senha recebida ap&oacute;s o pagamento.</p>
+        <div class="gate-form">
+          <input id="gateInput" class="gate-input" type="password" placeholder="Sua senha aqui" autocomplete="off"
+            spellcheck="false">
+          <button class="gate-btn" id="gateBtn">Assistir</button>
+        </div>
+        <p class="gate-error" id="gateError"></p>
+      </div>
+    </div>
+    <div class="video-player-wrap" id="videoPlayerWrap">
+      <div class="video-overlay-top" oncontextmenu="return false;"></div>
+      <div id="videoIframeSlot"></div>
+    </div>
+    <div class="theater-bar" id="theaterBar">
+      <button class="theater-btn" id="theaterBtn">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" />
+          <path d="M8 21h8M12 17v4" />
+        </svg>
+        <span id="theaterLabel">Modo teatro</span>
+      </button>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="divider"></div>
+  </div>
+
+  <section id="confianca">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <h2 class="section-title">Discri&ccedil;&atilde;o tamb&eacute;m &eacute; parte do cuidado.</h2>
+        </div>
+      </div>
+      <div class="trust-grid reveal">
+        <div class="trust-cell">
+          <h4>Cobran&ccedil;a discreta</h4>
+          <p>O nome que aparece na sua fatura n&atilde;o faz refer&ecirc;ncia ao conte&uacute;do adquirido.</p>
+        </div>
+        <div class="trust-cell">
+          <h4>Acesso vital&iacute;cio</h4>
+          <p>Pagou uma vez, assiste para sempre. Sem assinatura, sem renova&ccedil;&atilde;o, sem pegadinha.</p>
+        </div>
+        <div class="trust-cell">
+          <h4>Conte&uacute;do autoral</h4>
+          <p>Toda grava&ccedil;&atilde;o &eacute; produzida e publicada por mim, sem terceiriza&ccedil;&atilde;o.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIX POPUP -->
+  <div class="pix-overlay" id="pixOverlay" role="dialog" aria-modal="true" aria-label="Pagamento via Pix">
+    <div class="pix-modal">
+      <button class="pix-close" id="pixClose" aria-label="Fechar">
+        <svg viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <p class="pix-title">Pague com Pix</p>
+      <p class="pix-price">R$ 150,00 &mdash; acesso vital&iacute;cio</p>
+      <div class="pix-qr">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020126580014BR.GOV.BCB.PIX0136exemplo-chave-pix-ficticia5204000053039865406150.005802BR5913Tha+ASMR6009Sao+Paulo62070503***6304ABCD"
+          alt="QR Code Pix" loading="lazy">
+      </div>
+      <button class="pix-copy-btn" id="pixCopyBtn">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" />
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+        </svg>
+        Copiar c&oacute;digo Pix
+      </button>
+      <!-- hidden, used for clipboard -->
+      <div id="pixCode" style="display:none;">
+        00020126580014BR.GOV.BCB.PIX0136exemplo-chave-pix-ficticia5204000053039865406150.005802BR5913ThaASMR6009SaoPaulo62070503***6304ABCD
+      </div>
+      <p class="pix-note">Ap&oacute;s o pagamento, a senha de acesso ao v&iacute;deo<br>ser&aacute; enviada em
+        at&eacute; <strong>alguns minutos</strong>.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-links">
+          <a href="#">Privacidade</a>
+          <a href="#">Termos</a>
+          <a href="#">Contato</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Tha ASMR. Todos os direitos reservados.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+
+    const heroVideo = document.getElementById('heroVideo');
+    const heroMuteBtn = document.getElementById('heroMuteBtn');
+    const muteIcon = document.getElementById('muteIcon');
+    const muteLbl = document.getElementById('muteLbl');
+    let heroMuted = true;
+
+    const mutedSVG = `<path d="M11 5 6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>`;
+    const soundSVG = `<path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>`;
+
+    function setMuteState(muted) {
+      heroMuted = muted;
+      heroVideo.muted = muted;
+      if (!muted) heroVideo.volume = 0.12;
+      muteIcon.innerHTML = muted ? mutedSVG : soundSVG;
+      muteLbl.textContent = muted ? 'Ativar som' : 'Silenciar';
+    }
+
+    if (heroVideo) {
+      const fadeIn = () => heroVideo.classList.add('loaded');
+      if (heroVideo.readyState >= 3) fadeIn();
+      else heroVideo.addEventListener('canplay', fadeIn, { once: true });
+
+      // Pause audio when hero is out of viewport
+      const heroSection = heroVideo.closest('section');
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!heroMuted) {
+            heroVideo.muted = !entry.isIntersecting;
+          }
+          if (!entry.isIntersecting) {
+            heroVideo.pause();
+          } else {
+            heroVideo.play().catch(() => { });
+          }
+        });
+      }, { threshold: 0.1 });
+      heroObserver.observe(heroSection);
+
+      heroMuteBtn.addEventListener('click', () => setMuteState(!heroMuted));
+      // Start muted, update button label accordingly
+      setMuteState(true);
+    }
+
+    const field = document.getElementById('breathField');
+    window.addEventListener('mousemove', (e) => {
+      field.style.setProperty('--mx', (e.clientX / window.innerWidth * 100) + '%');
+      field.style.setProperty('--my', (e.clientY / window.innerHeight * 100) + '%');
+    }, { passive: true });
+
+    const headline = document.getElementById('heroHeadline');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced) {
+      window.addEventListener('scroll', () => {
+        const p = Math.min(window.scrollY / 700, 1);
+        headline.style.fontVariationSettings = `'opsz' ${9 + p * 60}, 'wght' ${400 - p * 100}`;
+      }, { passive: true });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // VIDEO PROTEGIDO
+    // ID do video: AnvfmaVpZVU ofuscado com XOR(42)+base64
+    // Para trocar: btoa([..."ID"].map(c=>String.fromCharCode(c.charCodeAt(0)^42)).join(""))
+    const _venc = 'a0RcTEdLfFpwfH8=';
+
+    // Hash SHA-256 da senha em base64. Senha: thaasmr2025
+    // Para trocar: const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('SENHA')); btoa(String.fromCharCode(...new Uint8Array(b)))
+    const _phash = 'V28czrrho/2SpWG/qqCUsuUUC6ZGpP9ebZbiGttD4oo=';
+
+    async function hashStr(s) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+      return btoa(String.fromCharCode(...new Uint8Array(buf)));
+    }
+    function decodeVid(enc) {
+      return [...atob(enc)].map(c => String.fromCharCode(c.charCodeAt(0) ^ 42)).join('');
+    }
+    function loadPlayer() {
+      const vid = decodeVid(_venc);
+      const slot = document.getElementById('videoIframeSlot');
+      const params = 'rel=0&modestbranding=1&autoplay=1&fs=1&origin=' + encodeURIComponent(location.origin);
+      slot.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + vid + '?' + params + '" allow="autoplay; encrypted-media; fullscreen" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation" title="Conte&uacute;do exclusivo"></iframe>';
+      document.getElementById('videoGate').style.display = 'none';
+      const wrap = document.getElementById('videoPlayerWrap');
+      wrap.classList.add('active');
+      // Overlay bottom-right to block YouTube logo/link
+      const brOverlay = document.createElement('div');
+      brOverlay.className = 'video-overlay-br';
+      brOverlay.addEventListener('contextmenu', e => e.preventDefault());
+      wrap.appendChild(brOverlay);
+      document.getElementById('theaterBar').classList.add('active');
+      slot.addEventListener('contextmenu', e => e.preventDefault());
+    }
+
+    document.getElementById('gateBtn').addEventListener('click', async () => {
+      const input = document.getElementById('gateInput');
+      const errEl = document.getElementById('gateError');
+      const h = await hashStr(input.value.trim());
+      if (h === _phash) {
+        errEl.textContent = '';
+        loadPlayer();
+      } else {
+        errEl.textContent = 'Senha incorreta. Verifique e tente novamente.';
+        input.classList.add('error');
+        setTimeout(() => input.classList.remove('error'), 600);
+        input.value = '';
+      }
+    });
+    document.getElementById('gateInput').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('gateBtn').click(); });
+
+    let theaterOn = false;
+    let savedScrollY = 0;
+    const theaterBtn = document.getElementById('theaterBtn');
+    const theaterLabel = document.getElementById('theaterLabel');
+    theaterBtn.addEventListener('click', () => {
+      theaterOn = !theaterOn;
+      if (theaterOn) {
+        savedScrollY = window.scrollY;
+      }
+      document.body.classList.toggle('theater-mode', theaterOn);
+      theaterLabel.textContent = theaterOn ? 'Sair do teatro' : 'Modo teatro';
+      if (!theaterOn) {
+        requestAnimationFrame(() => window.scrollTo({ top: savedScrollY, behavior: 'instant' }));
+      }
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && theaterOn) theaterBtn.click(); });
+
+    // PIX POPUP
+    const pixOverlay = document.getElementById('pixOverlay');
+    const pixClose = document.getElementById('pixClose');
+    const pixCopyBtn = document.getElementById('pixCopyBtn');
+    const pixCode = document.getElementById('pixCode');
+
+    function openPix() {
+      pixOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closePix() {
+      pixOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    ['heroBuyBtn', 'espacoBuyBtn', 'ritualBuyBtn'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('click', openPix);
+    });
+
+    pixClose.addEventListener('click', closePix);
+    pixOverlay.addEventListener('click', e => { if (e.target === pixOverlay) closePix(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closePix(); });
+
+    pixCopyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(pixCode.textContent.trim()).then(() => {
+        // Step 1: copied feedback
+        pixCopyBtn.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copiado!`;
+        pixCopyBtn.classList.add('copied');
+
+        // Step 2: simulate payment confirmed after 1.8s
+        setTimeout(() => {
+          const modal = document.querySelector('.pix-modal');
+          modal.innerHTML = `
+            <div style="text-align:center;padding:20px 0;">
+              <div style="width:64px;height:64px;border-radius:50%;background:rgba(74,158,106,0.15);border:1px solid rgba(74,158,106,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4a9e6a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <p style="font-family:var(--display);font-size:clamp(18px,3vw,26px);font-weight:400;font-style:italic;margin-bottom:8px;color:var(--ink);">Pagamento confirmado!</p>
+              <p style="font-size:13px;color:var(--ink-soft);margin-bottom:22px;line-height:1.6;">Sua senha de acesso exclusivo:</p>
+              <div style="font-family:monospace;font-size:24px;letter-spacing:0.18em;color:var(--accent);background:var(--bg-mid);border:1px solid var(--line);border-radius:14px;padding:16px 32px;display:inline-block;margin-bottom:24px;">thaasmr2025</div>
+              <p style="font-size:12px;color:var(--ink-faint);">Levando voc&ecirc; ao v&iacute;deo...</p>
+            </div>`;
+
+          // Step 3: after 3s close popup, fill password, scroll to video
+          setTimeout(() => {
+            closePix();
+            const inp = document.getElementById('gateInput');
+            if (inp) {
+              inp.value = 'thaasmr2025';
+              const section = document.getElementById('videoProtegido');
+              if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              setTimeout(() => inp.focus(), 700);
+            }
+          }, 3000);
+        }, 1800);
+      }).catch(() => {
+        pixCopyBtn.textContent = 'Erro ao copiar';
+        setTimeout(() => {
+          pixCopyBtn.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar c&oacute;digo Pix`;
+          pixCopyBtn.classList.remove('copied');
+        }, 2200);
+      });
+    });
+  </script>
+
+</body>
+
+</html>
