@@ -4,30 +4,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/favicon.png">
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
   <title>Tha ASMR - Conte&uacute;do exclusivo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=Nunito:wght@600;700;800&display=swap"
     rel="stylesheet">
   <style>
     :root {
-      --bg-void: #140d09;
-      --bg-deep: #1e150d;
-      --bg-mid: #2a1d11;
-      --line: rgba(214, 168, 108, 0.16);
-      --line-soft: rgba(214, 168, 108, 0.09);
-      --ink: #f4e8d6;
-      --ink-soft: #bda789;
-      --ink-faint: #71604a;
-      --accent: #e0954a;
-      --accent-rgb: 224, 149, 74;
-      --accent-dim: rgba(224, 149, 74, 0.35);
-      --ember: #a8501f;
-      --wax: #7a4130;
+      --bg-void: #09090d;
+      --bg-deep: #12111a;
+      --bg-mid: #1d1826;
+      --line: rgba(255, 185, 213, 0.18);
+      --line-soft: rgba(255, 185, 213, 0.1);
+      --ink: #fff4fb;
+      --ink-soft: #d9bdd0;
+      --ink-faint: #8d7486;
+      --accent: #ff8fc7;
+      --accent-rgb: 255, 143, 199;
+      --accent-dim: rgba(255, 143, 199, 0.35);
+      --ember: #a678ff;
+      --wax: #58d7ff;
       --ease: cubic-bezier(.16, .8, .24, 1);
-      --display: 'Fraunces', serif;
+      --display: 'Nunito', sans-serif;
       --body: 'Inter', sans-serif;
     }
 
@@ -71,7 +71,7 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background: radial-gradient(600px 600px at var(--mx, 50%) var(--my, 30%), rgba(224, 149, 74, 0.16), transparent 62%), radial-gradient(1100px 780px at 15% 5%, rgba(168, 80, 31, 0.14), transparent 58%), radial-gradient(900px 820px at 88% 45%, rgba(122, 65, 48, 0.18), transparent 60%);
+      background: radial-gradient(620px 620px at var(--mx, 50%) var(--my, 30%), rgba(255, 143, 199, 0.18), transparent 62%), radial-gradient(1050px 760px at 16% 4%, rgba(166, 120, 255, 0.13), transparent 58%), radial-gradient(900px 780px at 88% 44%, rgba(88, 215, 255, 0.13), transparent 60%);
       animation: flicker 5s linear infinite;
     }
 
@@ -170,7 +170,7 @@
       pointer-events: none;
       opacity: 0.05;
       mix-blend-mode: soft-light;
-      background-image: repeating-linear-gradient(45deg, rgba(244, 232, 214, 0.5) 0px, rgba(244, 232, 214, 0.5) 1px, transparent 1px, transparent 3px), repeating-linear-gradient(-45deg, rgba(20, 13, 9, 0.6) 0px, rgba(20, 13, 9, 0.6) 1px, transparent 1px, transparent 3px);
+      background-image: repeating-linear-gradient(45deg, rgba(255, 244, 251, 0.48) 0px, rgba(255, 244, 251, 0.48) 1px, transparent 1px, transparent 3px), repeating-linear-gradient(-45deg, rgba(9, 9, 13, 0.7) 0px, rgba(9, 9, 13, 0.7) 1px, transparent 1px, transparent 3px);
     }
 
     .embers {
@@ -188,7 +188,7 @@
       height: 3px;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 6px 1px rgba(224, 149, 74, 0.8);
+      box-shadow: 0 0 7px 1px rgba(255, 143, 199, 0.75);
       animation: rise linear infinite;
     }
 
@@ -246,7 +246,7 @@
     }
 
     header.scrolled {
-      background: rgba(20, 13, 9, 0.72);
+      background: rgba(9, 9, 13, 0.78);
       backdrop-filter: blur(14px) saturate(120%);
       border-bottom: 1px solid var(--line-soft);
     }
@@ -278,17 +278,40 @@
     }
 
     .nav-cta {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
       border: 1px solid var(--line);
       padding: 10px 20px;
       border-radius: 999px;
       font-size: 13px;
       color: var(--ink) !important;
-      transition: border-color .3s var(--ease), background .3s var(--ease);
+      transition: border-color .3s var(--ease), background .3s var(--ease), color .3s var(--ease);
+    }
+
+    .nav-cta::before {
+      content: '';
+      position: absolute;
+      inset: -44%;
+      z-index: -2;
+      border-radius: inherit;
+      background: conic-gradient(from 0deg, transparent 0deg, transparent 250deg, rgba(255, 143, 199, 0.95) 286deg, transparent 322deg, transparent 360deg);
+      animation: spinBorder 2.8s linear infinite;
+    }
+
+    .nav-cta::after {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      z-index: -1;
+      border-radius: inherit;
+      background: rgba(9, 9, 13, .92);
     }
 
     .nav-cta:hover {
       border-color: var(--accent-dim);
-      background: rgba(224, 149, 74, 0.06);
+      background: rgba(255, 143, 199, 0.08);
+      color: var(--ink) !important;
     }
 
     .hero {
@@ -335,7 +358,7 @@
     .hero-video-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(20, 13, 9, 0.55) 0%, rgba(20, 13, 9, 0.30) 50%, rgba(20, 13, 9, 0.80) 100%), linear-gradient(to right, rgba(20, 13, 9, 0.60) 0%, transparent 60%);
+      background: linear-gradient(to bottom, rgba(9, 9, 13, 0.42) 0%, rgba(9, 9, 13, 0.22) 48%, rgba(9, 9, 13, 0.94) 100%), linear-gradient(to right, rgba(9, 9, 13, 0.58) 0%, transparent 60%);
       pointer-events: none;
     }
 
@@ -539,6 +562,8 @@
       overflow: hidden;
       border: 1px solid var(--line);
       aspect-ratio: 4/5;
+      box-shadow: 0 24px 80px rgba(255, 143, 199, .16);
+      animation: portraitGlow 4.8s ease-in-out infinite;
     }
 
     .space-img-box img {
@@ -557,8 +582,39 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(20, 13, 9, 0.55) 0%, transparent 55%);
+      background: linear-gradient(to top, rgba(9, 9, 13, 0.52) 0%, transparent 55%);
       pointer-events: none;
+    }
+
+    .space-img-box::before {
+      content: '';
+      position: absolute;
+      inset: 10px;
+      z-index: 2;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, .38);
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+      pointer-events: none;
+      animation: portraitTrace 7s linear infinite;
+    }
+
+    @keyframes portraitTrace {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes portraitGlow {
+
+      0%,
+      100% {
+        box-shadow: 0 24px 80px rgba(255, 143, 199, .14);
+      }
+
+      50% {
+        box-shadow: 0 28px 96px rgba(88, 215, 255, .18);
+      }
     }
 
     .ritual {
@@ -957,7 +1013,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(20, 13, 9, 0.55);
+      background: rgba(9, 9, 13, 0.58);
       backdrop-filter: blur(10px);
       border: 1px solid var(--line);
       border-radius: 999px;
@@ -984,15 +1040,21 @@
     .hero-audio-btn:hover {
       border-color: var(--accent-dim);
       color: var(--ink);
-      background: rgba(20, 13, 9, 0.75);
+      background: rgba(9, 9, 13, 0.76);
     }
 
     /* --- BUY BUTTON --- */
     .btn-buy {
+      --btn-start: #ff8fc7;
+      --btn-end: #d35dff;
+      --btn-shadow: rgba(255, 143, 199, 0.28);
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: linear-gradient(135deg, var(--accent) 0%, #a8501f 100%);
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: none;
       color: #fff;
       border: none;
       border-radius: 999px;
@@ -1002,13 +1064,71 @@
       font-family: var(--body);
       cursor: pointer;
       transition: transform .4s var(--ease), box-shadow .4s var(--ease);
-      box-shadow: 0 8px 32px rgba(224, 149, 74, 0.25);
+      box-shadow: 0 8px 32px var(--btn-shadow);
       letter-spacing: 0.02em;
+    }
+
+    .btn-buy::before,
+    .btn-buy::after {
+      content: '';
+      position: absolute;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .btn-buy::before {
+      inset: -42%;
+      z-index: -2;
+      background: conic-gradient(from 0deg, transparent 0deg, transparent 250deg, rgba(255, 255, 255, 0.95) 286deg, transparent 322deg, transparent 360deg);
+      animation: spinBorder 2.8s linear infinite;
+    }
+
+    .btn-buy::after {
+      inset: 2px;
+      z-index: -1;
+      background: linear-gradient(135deg, var(--btn-start) 0%, var(--btn-end) 100%);
     }
 
     .btn-buy:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(224, 149, 74, 0.40);
+      box-shadow: 0 14px 40px var(--btn-shadow);
+    }
+
+    .outline-buy {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      box-shadow: none;
+    }
+
+    .outline-buy::before {
+      background: conic-gradient(from 0deg, transparent 0deg, transparent 250deg, rgba(255, 143, 199, 0.95) 286deg, transparent 322deg, transparent 360deg);
+    }
+
+    .outline-buy::after {
+      inset: 1px;
+      background: rgba(9, 9, 13, .92);
+    }
+
+    .outline-buy:hover {
+      border-color: var(--accent-dim);
+      background: transparent;
+      box-shadow: 0 10px 30px rgba(255, 143, 199, .12);
+    }
+
+    .nav-like-buy {
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      min-height: auto;
+    }
+
+    @keyframes spinBorder {
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .btn-buy svg {
@@ -1152,12 +1272,31 @@
 
     .product-card:hover {
       border-color: var(--accent-dim);
-      background: rgba(224, 149, 74, .05);
+      background: rgba(255, 143, 199, .06);
     }
 
     .product-card.selected {
       border-color: var(--accent);
-      background: rgba(224, 149, 74, .08);
+      background: rgba(255, 143, 199, .09);
+    }
+
+    .product-card.disabled {
+      cursor: not-allowed;
+      opacity: .48;
+      filter: grayscale(.35);
+    }
+
+    .product-card.disabled:hover {
+      border-color: var(--line);
+      background: var(--bg-mid);
+    }
+
+    .product-card.disabled .pc-type::after {
+      content: ' pausado temporariamente';
+      color: var(--ink-faint);
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0;
     }
 
     .pc-type {
@@ -1252,6 +1391,23 @@
       margin-top: 4px;
     }
 
+    .payment-warning {
+      border: 1px solid rgba(255, 255, 255, .24);
+      background: rgba(255, 255, 255, .08);
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-top: 18px;
+      color: var(--ink);
+      font-size: 13px;
+      line-height: 1.65;
+      text-align: left;
+      box-shadow: 0 10px 34px rgba(255, 143, 199, .1);
+    }
+
+    .payment-warning strong {
+      color: #fff;
+    }
+
     /* Step nav */
     .modal-nav {
       display: flex;
@@ -1310,7 +1466,7 @@
       justify-content: center;
       gap: 10px;
       width: 100%;
-      background: linear-gradient(135deg, var(--accent) 0%, #a8501f 100%);
+      background: linear-gradient(135deg, var(--accent) 0%, #a678ff 52%, #58d7ff 100%);
       color: #fff;
       border: none;
       border-radius: 999px;
@@ -1320,14 +1476,14 @@
       font-weight: 500;
       cursor: pointer;
       transition: transform .3s var(--ease), box-shadow .3s var(--ease);
-      box-shadow: 0 8px 32px rgba(224, 149, 74, .25);
+      box-shadow: 0 8px 32px rgba(255, 143, 199, .25);
       letter-spacing: .02em;
       margin-top: 4px;
     }
 
     .pix-copy-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(224, 149, 74, .4);
+      box-shadow: 0 14px 40px rgba(255, 143, 199, .38);
     }
 
     .pix-copy-btn.copied {
@@ -1335,6 +1491,38 @@
     }
 
     /* Success */
+    .success-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .success-actions .pix-copy-btn {
+      margin-top: 0;
+      min-height: 54px;
+      padding: 14px 18px;
+      text-align: center;
+    }
+
+    .pix-copy-btn.secondary {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      box-shadow: none;
+    }
+
+    .pix-copy-btn.secondary:hover {
+      border-color: rgba(255, 255, 255, .42);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, .08);
+    }
+
+    @media(max-width:560px) {
+      .success-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .success-field {
       background: var(--bg-mid);
       border: 1px solid var(--line-soft);
@@ -1439,7 +1627,7 @@
         align-items: center;
         justify-content: center;
         gap: 36px;
-        background: rgba(20, 13, 9, 0.97);
+        background: rgba(9, 9, 13, 0.97);
         backdrop-filter: blur(20px);
       }
 
@@ -1455,6 +1643,7 @@
       .nav-cta {
         padding: 14px 32px;
         font-size: 15px;
+        justify-content: center;
       }
 
       .hamburger {
@@ -1508,7 +1697,7 @@
     <nav class="nav-links" id="mobileNav">
       <a href="#espaco" class="mobile-nav-link">O que esperar</a>
       <a href="#ritual" class="mobile-nav-link">Como funciona</a>
-      <a href="#ritual" class="nav-cta mobile-nav-link">Garantir acesso</a>
+      <a href="#compra" class="nav-cta mobile-nav-link" id="navBuyBtn">Garantir acesso</a>
     </nav>
     <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -1537,24 +1726,24 @@
 
   <section class="hero">
     <div class="hero-video-wrap">
-      <video id="heroVideo" autoplay muted loop playsinline preload="auto">
-        <source src="video-hero.mp4" type="video/mp4">
+      <video id="heroVideo" autoplay loop playsinline preload="auto">
+        <source src="assets/video/video-hero.mp4" type="video/mp4">
       </video>
       <div class="hero-video-overlay"></div>
     </div>
     <div class="hero-content">
-      <h1 class="headline" id="heroHeadline">Tha ASMR<br><em>Proibid&atilde;o!</em></h1>
-      <p class="hero-sub">Espa&ccedil;o exclusivo para conte&uacute;dos pro&iacute;bidos pelo YouTube e para quem quer
-        apoiar o meu trabalho.</p>
+      <h1 class="headline" id="heroHeadline">Tha ASMR<br><em>Exclusivo</em></h1>
+      <p class="hero-sub">Criei esse cantinho fora do YouTube para ficar mais perto de voc&ecirc;s, postar v&iacute;deos
+        exclusivos e receber o apoio de quem acompanha meu canal.</p>
       <div class="hero-actions">
         <button class="btn-buy" id="heroBuyBtn">
           <svg viewBox="0 0 24 24">
             <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
             <path d="M12 8v4l3 3" />
           </svg>
-          Quero meu Exclusivo
+          Quero meu exclusivo!
         </button>
-        <a href="#ritual" class="link-quiet">Como funciona</a>
+        <a href="#espaco" class="link-quiet">Saiba mais</a>
       </div>
       <div class="scroll-cue"><span class="line"></span> role</div>
       <button class="hero-audio-btn" id="heroMuteBtn" aria-label="Silenciar v&iacute;deo">
@@ -1572,24 +1761,19 @@
     <div class="wrap">
       <div class="space-grid">
         <div class="space-copy reveal">
-          <p>Este &eacute; um espa&ccedil;o feito para quem quer <strong>apoiar o meu trabalho como youtuber</strong> e,
-            ao mesmo tempo, ter acesso a conte&uacute;dos exclusivos que simplesmente o YouTube n&atilde;o permite.</p>
-          <p>Aqui voce encontra <strong>ASMR normal:</strong> spit painting, lens licking, mic nibbling entre outros
-            tipos de gatilhos. A diferen&ccedil;a &eacute; que o YouTube n&atilde;o permite postar esse tipo de
-            v&iacute;deo sem desmonetizar ou restringir o alcance, mesmo sem nenhum elemento adulto.</p>
-          <p><strong>N&atilde;o h&aacute; nada provocativo, sensual ou expl&iacute;cito aqui.</strong> Nada do tipo.
-            &Eacute; s&oacute; ASMR de verdade, num lugar onde o algoritmo n&atilde;o interfere e o seu apoio chega
-            diretamente at&eacute; mim.</p>
-          <button class="btn-buy" id="espacoBuyBtn" style="margin-top: 28px;">
-            <svg viewBox="0 0 24 24">
-              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
-              <path d="M12 8v4l3 3" />
-            </svg>
-            Garantir meu Exclusivo
+          <p>Eu fiz esse espa&ccedil;o para quem gosta dos meus v&iacute;deos e quer <strong>apoiar meu trabalho de um
+              jeito mais direto</strong>, sem ficar refém das políticas do YouTube.</p>
+          <p>Aqui eu posso organizar acessos exclusivos a conte&uacute;dos que voc&ecirc;s
+            sempre pedem e eu não posso fazer por lá.</p>
+          <p><strong>Continua sendo ASMR, feito exclusivamente para você relaxar.</strong> A ideia &eacute; deixar
+            tudo
+            mais simples para voc&ecirc; assistir e mais organizado para eu entregar.</p>
+          <button class="btn-buy outline-buy nav-like-buy" id="espacoBuyBtn" style="margin-top: 28px;">
+            Quero apoiar o canal
           </button>
         </div>
         <div class="space-img-box reveal">
-          <img src="sessao-01.webp" alt="Tha ASMR" loading="lazy">
+          <img src="assets/images/sessao-01.webp" alt="Tha ASMR" loading="lazy">
         </div>
       </div>
     </div>
@@ -1608,36 +1792,32 @@
       </div>
       <div class="ritual">
         <div class="reveal">
-          <p class="section-note">O ASMR personalizado volta em breve &mdash; pausei por agenda cheia e
-            viagem.<br><br>Mas enquanto isso, voc&ecirc; pode acessar meu <strong style="color:var(--ink);">EXCLUSIVO
-              PARA PAGANTES</strong>:<br><br><strong style="color:var(--accent);font-style:italic;">10 minutos de ASMR
-              puro.</strong><br>5 min de Lens Licking + 5 min de Mic Licking<br><em>sem m&atilde;o na frente. Sem
-              an&uacute;ncios. Sem cortes.</em><br><br>Tudo isso por <strong style="color:var(--ink);">R$ 150</strong>
-            &mdash; com acesso vital&iacute;cio.</p>
+          <p class="section-note">Quero que seja simples: voc&ecirc; escolhe o acesso, preenche seus dados e recebe
+            tudo em um lugar s&oacute;.<br><br><strong style="color:var(--accent);font-style:italic;">Sem link perdido,
+              sem confus&atilde;o e com a carinha do canal.</strong></p>
         </div>
         <div class="ritual-steps">
           <div class="step reveal">
             <div class="step-mark">01</div>
             <div class="step-body">
               <h3>Comprar</h3>
-              <p>Voc&ecirc; clica em comprar e um pix copia e cola e um QR code s&atilde;o gerados pelo Mercado Pago
-                j&aacute; com o valor correto. &Eacute; 100% seguro!</p>
+              <p>Voc&ecirc; escolhe o acesso dispon&iacute;vel, coloca seu nome e informa WhatsApp ou e-mail para eu
+                conseguir te enviar tudo certinho.</p>
             </div>
           </div>
           <div class="step reveal">
             <div class="step-mark">02</div>
             <div class="step-body">
               <h3>Pagar</h3>
-              <p>Voc&ecirc; efetua o pagamento do pix pelo banco da sua prefer&ecirc;ncia e em poucos segundos o
-                pagamento &eacute; identificado pelo site.</p>
+              <p>O Pix aparece com o valor certo e, na vers&atilde;o final, a confirma&ccedil;&atilde;o libera seu
+                acesso automaticamente.</p>
             </div>
           </div>
           <div class="step reveal">
             <div class="step-mark">03</div>
             <div class="step-body">
               <h3>Assistir</h3>
-              <p>Voc&ecirc; recebe uma senha exclusiva para acessar o v&iacute;deo NA MESMA HORA! Voc&ecirc;
-                poder&aacute; assistir quantas vezes quiser, para sempre, sem limites.</p>
+              <p>Depois disso voc&ecirc; recebe seu link e sua senha exclusiva para assistir quando quiser.</p>
             </div>
           </div>
         </div>
@@ -1648,7 +1828,7 @@
             <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
             <path d="M12 8v4l3 3" />
           </svg>
-          Aproveitar Promo&ccedil;&atilde;o
+          Ver pr&eacute;via do acesso
         </button>
       </div>
     </div>
@@ -1658,7 +1838,7 @@
 
   <section class="video-section" id="videoProtegido">
     <div class="video-gate" id="videoGate"
-      style="background-image: url('thumb.jpg'); background-size: cover; background-position: center; position: relative;">
+      style="background-image: url('assets/images/thumb.jpg'); background-size: cover; background-position: center; position: relative;">
       <div style="position:absolute;inset:0;background:rgba(20,13,9,0.92);z-index:0;"></div>
       <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;">
         <div class="gate-icon">
@@ -1702,16 +1882,16 @@
       </div>
       <div class="trust-grid reveal">
         <div class="trust-cell">
-          <h4>Cobran&ccedil;a discreta</h4>
-          <p>O nome que aparece na sua fatura n&atilde;o faz refer&ecirc;ncia ao conte&uacute;do adquirido.</p>
+          <h4>Mais profissional</h4>
+          <p>Voc&ecirc; entende o acesso antes de comprar e recebe tudo de um jeito simples.</p>
         </div>
         <div class="trust-cell">
-          <h4>Acesso vital&iacute;cio</h4>
-          <p>Pagou uma vez, assiste para sempre. Sem assinatura, sem renova&ccedil;&atilde;o, sem pegadinha.</p>
+          <h4>Menos trabalho manual</h4>
+          <p>Eu consigo acompanhar contatos, acessos e pedidos sem depender de mensagem perdida.</p>
         </div>
         <div class="trust-cell">
-          <h4>Conte&uacute;do autoral</h4>
-          <p>Toda grava&ccedil;&atilde;o &eacute; produzida e publicada por mim, sem terceiriza&ccedil;&atilde;o.</p>
+          <h4>Com a cara do canal</h4>
+          <p>Visual fofo, escuro e colorido, inspirado nas minhas thumbs e no jeitinho do canal.</p>
         </div>
       </div>
     </div>
@@ -1735,16 +1915,18 @@
 
         <div class="product-cards">
           <div class="product-card selected" id="optCatalog">
-            <div class="pc-type">Catálogo</div>
-            <div class="pc-name">Acesso Imediato</div>
+            <div class="pc-type">EXCLUSIVO</div>
+            <div class="pc-name">Para Pagantes</div>
             <div class="pc-price">R$ 150</div>
-            <div class="pc-desc">O vídeo "Exclusivo para Pagantes" liberado na mesma hora. Acesso vitalício.</div>
+            <div class="pc-desc">Um vídeo exclusivo, liberado na mesma hora, com link e
+              senha de acesso.
+            </div>
           </div>
           <div class="product-card" id="optPersonal">
             <div class="pc-type">Sob medida</div>
             <div class="pc-name">Personalizado</div>
             <div class="pc-price">R$ 200</div>
-            <div class="pc-desc">Gravado exclusivamente para você. Entregue em até 7 dias após o pagamento.</div>
+            <div class="pc-desc">Um pedido feito sob medida, com gatilhos, objetos e clima escolhidos pelo fã.</div>
           </div>
         </div>
 
@@ -1756,12 +1938,12 @@
       <!-- Step 2: Form -->
       <div class="modal-step" id="step2">
         <p class="pix-title">Seus dados</p>
-        <p class="pix-note" style="text-align:left; margin-top:4px; margin-bottom:20px;">Por onde enviaremos seu acesso?
-          Preencha pelo menos um.</p>
+        <p class="pix-note" style="text-align:left; margin-top:4px; margin-bottom:20px;">Preencha seu nome e pelo menos
+          um contato: WhatsApp ou e-mail. Pode colocar os dois se quiser.</p>
 
         <div class="form-field">
-          <label>Seu Nome (opcional)</label>
-          <input type="text" id="fName" class="form-input" placeholder="Como quer ser chamado?">
+          <label>Seu nome</label>
+          <input type="text" id="fName" class="form-input" placeholder="Como quer ser chamado?" required>
         </div>
 
         <div class="form-field">
@@ -1794,9 +1976,8 @@
         <p class="pix-title">Pague com Pix</p>
         <p class="pix-price" id="pixDisplayPrice">R$ 150 &mdash; acesso vitalício</p>
         <div class="pix-qr">
-          <img
-            src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020126580014BR.GOV.BCB.PIX0136exemplo-chave-pix-ficticia"
-            alt="QR Code Pix" loading="lazy">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=PREVIA-PIX-THA-ASMR" alt="QR Code Pix"
+            loading="lazy">
         </div>
         <button class="pix-copy-btn" id="pixCopyBtn">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
@@ -1806,14 +1987,21 @@
           </svg>
           Copiar código Pix
         </button>
-        <div id="pixCode" style="display:none;">00020126580014BR.GOV.BCB.PIX0136exemplo-chave-pix-ficticia</div>
+        <div id="pixCode" style="display:none;">PREVIA-PIX-THA-ASMR</div>
 
-        <p class="pix-note" style="margin-top:24px;">Após o pagamento, o acesso será liberado.</p>
+        <div class="payment-warning">
+          <strong>N&atilde;o feche esta aba depois de pagar.</strong><br>
+          Assim que o pagamento for confirmado, voc&ecirc; recebe aqui o link e a senha exclusiva. Na pr&oacute;xima
+          tela tamb&eacute;m vai ter um bot&atilde;o para baixar esses dados em TXT.
+        </div>
 
-        <!-- Simulate Payment Button (just for this demo) -->
+        <p class="pix-note" style="margin-top:24px;">Prévia interativa: na versão final, a liberação acontece
+          automaticamente após a confirmação do pagamento.</p>
+
+        <!-- Preview flow button -->
         <button id="demoPayBtn"
-          style="width:100%; margin-top:20px; background:rgba(74,158,106,0.1); color:#4a9e6a; border:1px solid rgba(74,158,106,0.3); border-radius:12px; padding:10px; cursor:pointer; font-size:12px; transition:background .3s;">[Demo]
-          Simular pagamento confirmado</button>
+          style="width:100%; margin-top:20px; background:rgba(74,158,106,0.1); color:#4a9e6a; border:1px solid rgba(74,158,106,0.3); border-radius:12px; padding:12px; cursor:pointer; font-size:13px; transition:background .3s;">
+          Continuar para prévia do acesso</button>
       </div>
 
       <!-- Step 4: Success -->
@@ -1848,8 +2036,11 @@
             </div>
           </div>
 
-          <a href="#" id="watchNowBtn" target="_blank" class="pix-copy-btn" style="text-decoration:none;">Acessar página
-            do vídeo &rarr;</a>
+          <div class="success-actions">
+            <button id="downloadAccessBtn" class="pix-copy-btn secondary" type="button">Baixar TXT</button>
+            <a href="#" id="watchNowBtn" target="_blank" class="pix-copy-btn" style="text-decoration:none;">Assistir
+              agora &rarr;</a>
+          </div>
         </div>
       </div>
 
@@ -1877,7 +2068,7 @@
     const heroMuteBtn = document.getElementById('heroMuteBtn');
     const muteIcon = document.getElementById('muteIcon');
     const muteLbl = document.getElementById('muteLbl');
-    let heroMuted = true;
+    let heroMuted = false;
 
     const mutedSVG = `<path d="M11 5 6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>`;
     const soundSVG = `<path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>`;
@@ -1905,15 +2096,21 @@
           if (!entry.isIntersecting) {
             heroVideo.pause();
           } else {
-            heroVideo.play().catch(() => { });
+            heroVideo.play().catch(() => {
+              setMuteState(true);
+              heroVideo.play().catch(() => { });
+            });
           }
         });
       }, { threshold: 0.1 });
       heroObserver.observe(heroSection);
 
       heroMuteBtn.addEventListener('click', () => setMuteState(!heroMuted));
-      // Start muted, update button label accordingly
-      setMuteState(true);
+      setMuteState(false);
+      heroVideo.play().catch(() => {
+        setMuteState(true);
+        heroVideo.play().catch(() => { });
+      });
     }
 
     const embersField = document.getElementById('embersField');
@@ -1970,6 +2167,19 @@
     function decodeVid(enc) {
       return [...atob(enc)].map(c => String.fromCharCode(c.charCodeAt(0) ^ 42)).join('');
     }
+
+    function getSavedOrders() {
+      try {
+        return JSON.parse(localStorage.getItem('thaAsmrOrders') || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function hasMatchingGeneratedPassword(hash) {
+      return getSavedOrders().some(order => order.passwordHash === hash);
+    }
+
     function loadPlayer() {
       const vid = decodeVid(_venc);
       const slot = document.getElementById('videoIframeSlot');
@@ -1991,7 +2201,7 @@
       const input = document.getElementById('gateInput');
       const errEl = document.getElementById('gateError');
       const h = await hashStr(input.value.trim());
-      if (h === _phash) {
+      if (h === _phash || hasMatchingGeneratedPassword(h)) {
         errEl.textContent = '';
         loadPlayer();
       } else {
@@ -2029,18 +2239,23 @@
       document.getElementById('step3'),
       document.getElementById('step4')
     ];
+    let currentPixStep = 0;
+    let accessTxtDownloaded = false;
 
     function showStep(idx) {
+      currentPixStep = idx;
       steps.forEach((s, i) => s.classList.toggle('active', i === idx));
     }
 
     function openPix() {
       showStep(0); // always reset to step 1
+      if (typeof applyPersonalizedAvailability === 'function') applyPersonalizedAvailability();
       document.getElementById('fName').value = '';
       document.getElementById('fWhats').value = '';
       document.getElementById('fEmail').value = '';
       document.getElementById('fDesc').value = '';
       document.getElementById('formError').textContent = '';
+      accessTxtDownloaded = false;
       pixOverlay.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
@@ -2051,7 +2266,7 @@
     }
 
     // Open triggers
-    ['heroBuyBtn', 'espacoBuyBtn', 'ritualBuyBtn'].forEach(id => {
+    ['navBuyBtn', 'heroBuyBtn', 'espacoBuyBtn', 'ritualBuyBtn'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.addEventListener('click', e => { e.preventDefault(); openPix(); });
     });
@@ -2060,21 +2275,54 @@
     pixOverlay.addEventListener('click', e => { if (e.target === pixOverlay) closePix(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closePix(); });
 
+    window.addEventListener('beforeunload', (event) => {
+      const isPaymentStep = pixOverlay.classList.contains('open') && currentPixStep === 2;
+      const isAccessStepWithoutDownload = pixOverlay.classList.contains('open') && currentPixStep === 3 && !accessTxtDownloaded;
+      if (!isPaymentStep && !isAccessStepWithoutDownload) return;
+      event.preventDefault();
+      event.returnValue = 'Não feche esta aba ainda. Confirme se você já recebeu e baixou o TXT com seu link e senha.';
+    });
+
     // --- STEP 1: Product Selection ---
+    const SETTINGS_KEY = 'thaAsmrSettings';
     let selectedType = 'catalog'; // 'catalog' | 'personalized'
     const optCat = document.getElementById('optCatalog');
     const optPers = document.getElementById('optPersonal');
     const descBox = document.getElementById('personalDescBox');
 
-    optCat.addEventListener('click', () => {
+    function getSettings() {
+      try {
+        return { personalizedEnabled: false, ...JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}') };
+      } catch {
+        return { personalizedEnabled: false };
+      }
+    }
+
+    function personalizedEnabled() {
+      return getSettings().personalizedEnabled;
+    }
+
+    function selectCatalog() {
       selectedType = 'catalog';
       optCat.classList.add('selected');
       optPers.classList.remove('selected');
       descBox.style.display = 'none';
       document.getElementById('pixDisplayPrice').innerHTML = 'R$ 150 &mdash; acesso vitalício';
+    }
+
+    function applyPersonalizedAvailability() {
+      const enabled = personalizedEnabled();
+      optPers.classList.toggle('disabled', !enabled);
+      optPers.setAttribute('aria-disabled', String(!enabled));
+      if (!enabled && selectedType === 'personalized') selectCatalog();
+    }
+
+    optCat.addEventListener('click', () => {
+      selectCatalog();
     });
 
     optPers.addEventListener('click', () => {
+      if (!personalizedEnabled()) return;
       selectedType = 'personalized';
       optPers.classList.add('selected');
       optCat.classList.remove('selected');
@@ -2082,16 +2330,23 @@
       document.getElementById('pixDisplayPrice').innerHTML = 'R$ 200 &mdash; acesso vitalício';
     });
 
+    applyPersonalizedAvailability();
+
     document.getElementById('btnToStep2').addEventListener('click', () => showStep(1));
     document.getElementById('btnBackTo1').addEventListener('click', () => showStep(0));
 
     // --- STEP 2: Form ---
     document.getElementById('btnToStep3').addEventListener('click', () => {
+      const name = document.getElementById('fName').value.trim();
       const whats = document.getElementById('fWhats').value.trim();
       const email = document.getElementById('fEmail').value.trim();
       const err = document.getElementById('formError');
+      if (!name) {
+        err.textContent = 'Por favor, informe seu nome.';
+        return;
+      }
       if (!whats && !email) {
-        err.textContent = 'Por favor, informe pelo menos o WhatsApp ou E-mail.';
+        err.textContent = 'Informe WhatsApp ou e-mail para receber seu acesso. Se quiser, pode preencher os dois.';
         return;
       }
       err.textContent = '';
@@ -2108,7 +2363,7 @@
       });
     });
 
-    // --- DEMO PAYMENT SUCCESS ---
+    // --- PREVIEW PAYMENT SUCCESS ---
     function genRandomStr(len) {
       return Math.random().toString(36).substring(2, 2 + len);
     }
@@ -2127,8 +2382,7 @@
       // 2. Create Order in LocalStorage
       const orders = JSON.parse(localStorage.getItem('thaAsmrOrders') || '[]');
 
-      // The current catalog video encrypted ID from the page (we will just reuse the dummy one or a real one)
-      // Since this is a demo, we encode a dummy or the actual youtube id 'AnvfmaVpZVU'
+      // The current catalog video encrypted ID from the page.
       const encodeVid = (id) => btoa([...id].map(c => String.fromCharCode(c.charCodeAt(0) ^ 42)).join(''));
 
       const newOrder = {
@@ -2182,6 +2436,19 @@
     }
     setupCopy('copyUrlBtn', 'resUrl');
     setupCopy('copyPwBtn', 'resPw');
+
+    document.getElementById('downloadAccessBtn').addEventListener('click', () => {
+      const url = document.getElementById('resUrl').textContent.trim();
+      const password = document.getElementById('resPw').textContent.trim();
+      const content = `Tha ASMR - Acesso exclusivo\n\nLink: ${url}\nSenha: ${password}\n\nGuarde este arquivo para acessar seu vídeo quando quiser.`;
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'tha-asmr-acesso.txt';
+      link.click();
+      URL.revokeObjectURL(link.href);
+      accessTxtDownloaded = true;
+    });
   </script>
 
 </body>
